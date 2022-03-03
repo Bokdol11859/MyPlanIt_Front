@@ -33,7 +33,7 @@ function App() {
           <Route path="/onboard3" element={<Onboard3 />} />
           <Route path="/todo" element={<Todo />} />
           <Route path="/myplan" element={<MyPlan />} />
-          <Route path="/planmarket" element={<PlanMarket/>} />
+          <Route path="/planmarket" element={<PlanMarket />} />
 
           <Route path="/main/wishtemplate" element={<WishTemplate />} />
           <Route path="/main/viewtemplate/:id" element={<ViewTemplate />} />
