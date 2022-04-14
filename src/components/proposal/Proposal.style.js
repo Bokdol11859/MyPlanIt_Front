@@ -6,7 +6,8 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: fixed;
+  z-index: 10;
   margin: 10px;
 `;
 
@@ -21,7 +22,7 @@ export const InputArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 10px 0 28px;
+  margin: 60px 0 10px;
 `;
 
 export const InputField = styled.textarea`
@@ -31,16 +32,17 @@ export const InputField = styled.textarea`
     font-family: "PretendardRegular";
     font-size: 13px;
   }
-  width: 330px;
-  height: 136px;
+  width: 327px;
+  height: 78px;
   border: 1px ${props => props.warning? "#F87676": "#EDEDED"} solid;
-  border-radius: 6px;
+  border-radius: 4px;
   vertical-align: top;
   resize: none;
   outline: none;
   padding: 14px;
   font-family: "PretendardRegular";
   font-size: 12px;
+  line-height: 16px;
 `;
 
 export const Button = styled.button`
@@ -65,7 +67,9 @@ export const Content = styled.div`
   margin-top: 36px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow-y: hidden;
+  width: 100%;
 `;
 
 export const CardContainer = styled.div`
@@ -75,7 +79,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 90px;
-
+  width: 100%;
 `;
 
 export const ContentTitle = styled.p`
@@ -86,5 +90,5 @@ export const ContentTitle = styled.p`
   font-size: 16px;
   line-height: 16px;
   letter-spacing: -0.3px;
-  width: 100%;
+  width: 327px;
 `;
