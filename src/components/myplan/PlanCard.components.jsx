@@ -25,14 +25,14 @@ function PlanCard({
             <ProfileText>{writer_intro}</ProfileText>
             <ProfileText isName>{writer_name}</ProfileText>
           </Profile>
-          <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
+          {/* <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
             <FavoriteIcon
               style={{
                 color: "#8977f7",
                 filter: " drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1))",
               }}
             />
-          </div>
+          </div> */}
         </ProfileContainer>
         <PlanDesc>{desc}</PlanDesc>
 
@@ -54,7 +54,7 @@ const Container = styled.div`
   border-radius: 4px;
   margin: 10px;
   width: 327px;
-  background-color: "white";
+  background-color: white;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;

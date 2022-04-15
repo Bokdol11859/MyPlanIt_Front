@@ -22,6 +22,7 @@ function PlanDetail() {
 
   useEffect(() => {
     fetchTodos();
+    setDelay([]);
   }, [current, update]);
 
   const fetchTodos = () => {
@@ -36,17 +37,18 @@ function PlanDetail() {
         }
       )
       .then((res) => {
-        const datas = res.data;
-        const plans = [];
-        datas.data.forEach((todo) => {
-            Object.assign(todo, {plan_id: id})
-          if (plans.length < todo.date + 1) {
-            plans.push([todo.date, [todo]]);
-          } else {
-            plans[todo.date][1].push(todo);
-          }
+        const fetchData = res.data;
+        const todos = {};
+        fetchData.data.forEach((todo) => {
+            Object.assign(todo, {plan_id: id});
+            if (todos[todo.day]) {
+              todos[todo.day].push(todo);
+            }
+            else {
+              todos[todo.day] = [todo];
+            }
         });
-        setData(plans);
+        setData(Object.entries(todos));
       });
   };
 
@@ -98,7 +100,7 @@ function PlanDetail() {
         {data.map((plan, i) => (
           <PlanContainer key={i}>
             <PlanHeader>
-              <Date>{plan[0] + 1}일차</Date>
+              <Date>{parseInt(plan[0]) + 1}일차</Date>
             </PlanHeader>
             {plan[1].map((todo, i) => (
               <PlanTodo
@@ -138,7 +140,7 @@ const Container = styled.div`
   align-items: center;
   background-color: #fbfbfb;
   position: relative;
-  height: 100vh;
+  height: 100%;
 `;
 
 const TodoContainer = styled.div`

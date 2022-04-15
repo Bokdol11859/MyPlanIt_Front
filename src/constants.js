@@ -1,4 +1,5 @@
 const constants = {
+  LOGO: "/images/logo.png",
   TODO_COLORED: "/images/todo_on.svg",
   TODO_UNCOLORED: "/images/todo_off.svg",
   PLAN_COLORED: "/images/planmarket_on.svg",
@@ -8,6 +9,7 @@ const constants = {
   DO_TOMORROW: "/images/do_tomorrow.svg",
   DELETE: "/images/delete.svg",
   DETAIL_ICON: "/images/detail.png",
+  PROPOSAL: "/images/proposal.svg"
 };
 
 export default constants;
