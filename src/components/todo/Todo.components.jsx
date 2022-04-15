@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import BottomNavBar from "../globalcomponents/BottomNavBar.components";
 import axios from "axios";
+import { format } from "date-fns";
 import TodoHeader from "./TodoHeader.components";
 import TodoPlan from "./TodoPlan.components";
 import TodoMy from "./TodoMy.components";
@@ -17,6 +18,7 @@ function Todo() {
       ? new Date(sessionStorage.getItem("date"))
       : new Date()
   );
+  
   const [current, setCurrent] = useState("PLAN");
   const [planData, setPlanData] = useState();
   const [myTodoData, setMyTodoData] = useState();
@@ -25,16 +27,11 @@ function Todo() {
   const [edit, setEdit] = useState(false);
   const [delay, setDelay] = useState([]);
 
-  const formatDate = () => {
-    const timeOffset = selectedDate.getTimezoneOffset() * 60000;
-    return new Date(selectedDate.getTime() - timeOffset).toISOString().slice(0, 10);
-  };
-
   const fetchPlan = async () => {
     try {
       await axios
         .get(
-          `https://myplanit.link/todos/plan/${formatDate()}`,
+          `https://myplanit.link/todos/plan/${format(selectedDate, "yyyy-MM-dd")}`,
           {
             Authorization: `Bearer ${accessToken}`,
             withCredentials: true,
@@ -57,7 +54,7 @@ function Todo() {
     try {
       await axios
         .get(
-          `https://myplanit.link/todos/my/${formatDate()}`,
+          `https://myplanit.link/todos/my/${format(selectedDate, "yyyy-MM-dd")}`,
           {
             Authorization: `Bearer ${accessToken}`,
             withCredentials: true,
