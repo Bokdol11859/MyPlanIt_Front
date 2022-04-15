@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PlanCard from "./PlanCard.components";
 import PlanSheet from "./PlanSheet.components";
 
-function MyPlanContent({ plans, register }) {
+function MyPlanContent({ plans, register, buy }) {
   const [isOpen, setIsOpen] = useState(false);
   const [plan, setPlan] = useState({});
   return (
@@ -32,6 +32,18 @@ function MyPlanContent({ plans, register }) {
           planId={plan.id}
           title={plan.name}
           writer_name={plan.writer_name}
+          register
+        />
+      )}
+
+      {buy && (
+        <PlanSheet
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          planId={plan.id}
+          title={plan.name}
+          writer_name={plan.writer_name}
+          buy
         />
       )}
     </Container>
@@ -43,8 +55,10 @@ export default MyPlanContent;
 const Container = styled.div`
   overflow-y: scroll;
   position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 100px;
   margin-bottom: 90px;
 `;

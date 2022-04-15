@@ -4,7 +4,6 @@ import { Loading } from "@nextui-org/react";
 import BottomNavBar from "../globalcomponents/BottomNavBar.components";
 import MyPlanHeader from "./MyPlanHeader.components";
 import MyPlanContent from "./MyPlanContent.components";
-import styled from "styled-components";
 import LoadingScreen from "../globalcomponents/Loading.components";
 
 function MyPlan() {
@@ -79,7 +78,7 @@ function MyPlan() {
     );
 
   return (
-    <Container>
+    <>
       <MyPlanHeader
         current={current}
         setCurrent={setCurrent}
@@ -87,24 +86,14 @@ function MyPlan() {
         registerLength={registerLength}
       />
 
-      {current === "BUY" && <MyPlanContent plans={buyPlans} />}
+      {current === "BUY" && <MyPlanContent plans={buyPlans} buy />}
       {current === "REGISTER" && (
         <MyPlanContent plans={registerPlans} register />
       )}
 
       <BottomNavBar current="TODO" />
-    </Container>
+    </>
   );
 }
 
 export default MyPlan;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #fbfbfb;
-  position: relative;
-  height: 100%;
-`;

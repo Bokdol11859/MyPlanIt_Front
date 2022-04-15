@@ -17,7 +17,7 @@ function TodoMy({
   const noTodoImg = (
     <img
       src={constants.NO_TODO_IMG}
-      style={{ width: "80%", marginTop: "140px" }}
+      style={{ width: "260px", marginTop: "140px" }}
     />
   );
 
@@ -52,9 +52,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 110px;
+  margin-top: 130px;
   margin-bottom: 95px;
-  width: 327px;
+  width: 100%;
   overflow-y: scroll;
   font-family: "PretendardSemiBold";
 `;

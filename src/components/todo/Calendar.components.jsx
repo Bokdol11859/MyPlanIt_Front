@@ -1,6 +1,5 @@
 import React from "react";
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
-import { InputAdornment } from "@material-ui/core";
 import { ko } from "date-fns/locale";
 import DateFnsUtils from "@date-io/date-fns";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
