@@ -87,7 +87,7 @@ function MyPlan() {
         registerLength={registerLength}
       />
 
-      {current === "BUY" && <MyPlanContent plans={buyPlans} />}
+      {current === "BUY" && <MyPlanContent plans={buyPlans} buy />}
       {current === "REGISTER" && (
         <MyPlanContent plans={registerPlans} register />
       )}
