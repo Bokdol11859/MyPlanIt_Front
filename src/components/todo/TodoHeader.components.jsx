@@ -2,6 +2,7 @@ import Calendar from "./Calendar.components";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import styled from "styled-components";
+import WeekCalendar from "./WeekCalendar.components";
 
 function TodoHeader({
   selectedDate,
@@ -25,6 +26,11 @@ function TodoHeader({
           <StyledButton>MY PLAN</StyledButton>
         </Link>
       </UpperHeader>
+
+      <WeekCalendar
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
 
       <LowerHeader>
         {linkText.map((item, i) => (
@@ -59,22 +65,26 @@ function TodoHeader({
 export default TodoHeader;
 
 const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: fixed;
   top: 0;
   z-index: 999;
-  width: 327px;
+  width: 100%;
   background-color: #fbfbfb;
-  height: 110px;
 `;
 
 const UpperHeader = styled.div`
   display: flex;
+  width: 327px;
   justify-content: space-between;
   align-items: center;
 `;
 
 const LowerHeader = styled.div`
   display: flex;
+  width: 327px;
   position: relative;
 `;
 

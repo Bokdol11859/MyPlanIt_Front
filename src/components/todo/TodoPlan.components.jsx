@@ -16,7 +16,7 @@ function TodoPlan({
   const planExist = planData?.length;
   const noPlanImg = (
     <img
-      style={{ width: "80%", marginTop: "50px" }}
+      style={{ width: "240px", marginTop: "50px" }}
       src={constants.NO_PLAN_IMG}
       onClick={() => {
         navigate("/planmarket");
@@ -49,9 +49,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 110px;
+  margin-top: 130px;
   margin-bottom: 90px;
-  width: 327px;
+  width: 100%;
   overflow-y: scroll;
   font-family: "PretendardSemiBold";
 `;
