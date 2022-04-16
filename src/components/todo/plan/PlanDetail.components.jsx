@@ -17,8 +17,9 @@ function PlanDetail() {
   const [delay, setDelay] = useState([]);
   const [update, setUpdate] = useState(true);
   const [edit, setEdit] = useState(false);
-  const linkText = ["All", "Progress", "Done"];
+  const [linkText, setLinkText] = useState(["All", "Progress", "Done"]);
   const [data, setData] = useState([]);
+  const [editable, setEditable] = useState(true);
 
   useEffect(() => {
     fetchTodos();
@@ -37,16 +38,27 @@ function PlanDetail() {
         }
       )
       .then((res) => {
+        console.log(res);
         const fetchData = res.data;
         const todos = {};
         fetchData.data.forEach((todo) => {
-            Object.assign(todo, {plan_id: id});
+          Object.assign(todo, { plan_id: id });
+          console.log(Object.keys(todo).length);
+          if (Object.keys(todo).length === 4) {
+            setLinkText(["All"]);
+            setEditable(false);
+            if (todos[todo.date]) {
+              todos[todo.date].push(todo);
+            } else {
+              todos[todo.date] = [todo];
+            }
+          } else {
             if (todos[todo.day]) {
               todos[todo.day].push(todo);
-            }
-            else {
+            } else {
               todos[todo.day] = [todo];
             }
+          }
         });
         setData(Object.entries(todos));
       });
@@ -69,30 +81,34 @@ function PlanDetail() {
         </FlexBox>
 
         <LowerHeader>
-          {linkText.map((item, i) => (
-            <LinkButton
-              key={i}
-              selected={current === item}
-              onClick={() => setCurrent(item)}
+          {linkText.map((item, i) => {
+            return (
+              <LinkButton
+                key={i}
+                selected={current === item}
+                onClick={() => setCurrent(item)}
+              >
+                {item}
+              </LinkButton>
+            );
+          })}
+          {editable && (
+            <EditButton
+              editing={edit}
+              onClick={() => {
+                setEdit(!edit);
+                setDelay([]);
+              }}
             >
-              {item}
-            </LinkButton>
-          ))}
-          <EditButton
-            editing={edit}
-            onClick={() => {
-              setEdit(!edit);
-              setDelay([]);
-            }}
-          >
-            {edit && (
-              <img
-                src="/images/purpletick.png"
-                style={{ width: "12px", marginRight: 4 }}
-              />
-            )}
-            {edit ? "편집완료" : "편집하기"}
-          </EditButton>
+              {edit && (
+                <img
+                  src="/images/purpletick.png"
+                  style={{ width: "12px", marginRight: 4 }}
+                />
+              )}
+              {edit ? "편집완료" : "편집하기"}
+            </EditButton>
+          )}
         </LowerHeader>
       </Header>
 
@@ -102,17 +118,23 @@ function PlanDetail() {
             <PlanHeader>
               <Date>{parseInt(plan[0]) + 1}일차</Date>
             </PlanHeader>
-            {plan[1].map((todo, i) => (
-              <PlanTodo
-                key={i}
-                todo={todo}
-                edit={edit}
-                update={update}
-                setUpdate={setUpdate}
-                delay={delay}
-                setDelay={setDelay}
-              />
-            ))}
+            {plan[1].map((todo, i) => {
+              if (Object.keys(todo).length === 4) {
+                todo.plan_todo = todo.name;
+                todo.plan_todo_id = todo.id;
+              }
+              return (
+                <PlanTodo
+                  key={i}
+                  todo={todo}
+                  edit={edit}
+                  update={update}
+                  setUpdate={setUpdate}
+                  delay={delay}
+                  setDelay={setDelay}
+                />
+              );
+            })}
           </PlanContainer>
         ))}
       </TodoContainer>

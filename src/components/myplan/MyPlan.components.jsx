@@ -29,6 +29,7 @@ function MyPlan() {
             },
           }
         );
+        console.log(response);
         setRegisterPlans(
           response.data.register_plans ? response.data.register_plans : []
         );
@@ -42,9 +43,7 @@ function MyPlan() {
     };
 
     fetchRegisterPlans();
-  }, []);
 
-  useEffect(() => {
     const fetchBuyPlans = async () => {
       try {
         const response = await axios.get("https://myplanit.link/myplans/buy", {
@@ -54,6 +53,7 @@ function MyPlan() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
+        console.log(response);
         setBuyPlans(response.data.buy_plans ? response.data.buy_plans : []);
         setBuyLength(
           response.data.buy_plans ? response.data.buy_plans.length : 0
@@ -86,7 +86,7 @@ function MyPlan() {
         registerLength={registerLength}
       />
 
-      {current === "BUY" && <MyPlanContent plans={buyPlans} />}
+      {current === "BUY" && <MyPlanContent plans={buyPlans} buy />}
       {current === "REGISTER" && (
         <MyPlanContent plans={registerPlans} register />
       )}
