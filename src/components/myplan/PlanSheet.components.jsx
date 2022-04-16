@@ -13,6 +13,8 @@ function PlanSheet({
   planId,
   register,
   buy,
+  date,
+  is_registered,
 }) {
   const navigate = useNavigate();
   const accessToken = sessionStorage.getItem("access");
@@ -77,7 +79,12 @@ function PlanSheet({
               }}
             >
               <Title>{title}</Title>
-              <Text color="#929292">{writer_name}</Text>
+              <Author>
+                <Text color="black">
+                  {date[0]} ~ {date[1]}
+                </Text>
+                <Text color="#929292">{writer_name}</Text>
+              </Author>
               <StyledButton
                 onClick={() => {
                   navigate("../todo/plan/" + planId, {
@@ -120,7 +127,10 @@ function PlanSheet({
               }}
             >
               <Title>{title}</Title>
-              <Text color="#929292">{writer_name}</Text>
+              <Text color="#929292" style={{ width: "327px" }}>
+                {writer_name}
+              </Text>
+              {}
               <StyledButton onClick={registerPlan} underline>
                 <Text>투두 등록하기</Text>
               </StyledButton>
@@ -163,7 +173,7 @@ const Title = styled.div`
 const Text = styled.div`
   font-family: "PretendardRegular";
   font-size: 14px;
-  width: 327px;
+
   color: ${(props) => props.color || "#000000"};
 `;
 
@@ -179,4 +189,11 @@ const StyledButton = styled.button`
 
   border-bottom: ${(props) =>
     props.underline ? "0.7px solid #E9E9E9" : "none"};
+`;
+
+const Author = styled.span`
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 327px;
 `;

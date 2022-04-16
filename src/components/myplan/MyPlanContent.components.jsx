@@ -6,6 +6,8 @@ import PlanSheet from "./PlanSheet.components";
 function MyPlanContent({ plans, register, buy }) {
   const [isOpen, setIsOpen] = useState(false);
   const [plan, setPlan] = useState({});
+  const [date, setDate] = useState({});
+  const [registered, setRegistered] = useState();
   return (
     <Container>
       {plans.map((item, i) => (
@@ -20,7 +22,9 @@ function MyPlanContent({ plans, register, buy }) {
           tags={item.plan.tags}
           onClick={() => {
             setPlan({ ...item.plan });
+            setDate([item.start_date, item.finish_date]);
             setIsOpen(true);
+            setRegistered(item.register_flag);
           }}
         />
       ))}
@@ -32,6 +36,7 @@ function MyPlanContent({ plans, register, buy }) {
           planId={plan.id}
           title={plan.name}
           writer_name={plan.writer_name}
+          date={date}
           register
         />
       )}
@@ -43,6 +48,7 @@ function MyPlanContent({ plans, register, buy }) {
           planId={plan.id}
           title={plan.name}
           writer_name={plan.writer_name}
+          is_registered={registered}
           buy
         />
       )}
