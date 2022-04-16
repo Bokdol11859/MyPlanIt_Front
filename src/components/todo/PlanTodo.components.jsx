@@ -70,7 +70,7 @@ function PlanTodo({
 export default PlanTodo;
 
 const Container = styled.div`
-  padding: 5px 12px;
+  padding: 5px 0;
   height: 36px;
   margin-top: 5px;
   margin-left: 0 !important;
@@ -115,6 +115,6 @@ const StyledCheckbox = styled(Checkbox)`
 `;
 
 const DetailIcon = styled.img`
-  height: 12px;
+  height: 16px;
   margin-left: auto;
 `;

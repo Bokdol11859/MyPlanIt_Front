@@ -8,7 +8,7 @@ const constants = {
   NO_TODO_IMG: "/images/my.png",
   DO_TOMORROW: "/images/do_tomorrow.svg",
   DELETE: "/images/delete.svg",
-  DETAIL_ICON: "/images/detail.png",
+  DETAIL_ICON: "/images/detail.svg",
   PROPOSAL: "/images/proposal.svg"
 };
 
