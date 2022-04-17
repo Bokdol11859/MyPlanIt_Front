@@ -63,7 +63,7 @@ const Title = styled.span`
   font-size: 16px;
   font-family: "PretendardRegular";
   font-weight: 600;
-  padding: 0 12px;
+  padding-right: 12px;
 `;
 
 const Achievement = styled.span`
