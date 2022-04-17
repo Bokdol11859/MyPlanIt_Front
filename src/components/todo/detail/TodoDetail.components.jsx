@@ -45,7 +45,7 @@ function TodoDetail() {
   if (!imgUrl) return null;
   if (loading) return <LoadingScreen />;
   return (
-    <Container>
+    <>
       <Header>
         <FlexBox>
           <ArrowBackIosIcon
@@ -61,26 +61,16 @@ function TodoDetail() {
         </FlexBox>
       </Header>
 
-      <div style={{ overflowY: "scroll", paddingTop: "28px" }}>
-        <img src={imgUrl} style={{ width: "327px", marginBottom: "120px" }} />
-      </div>
+      <Content>
+        <MainImg src={imgUrl} />
+      </Content>
 
       <BottomNavBar current="TODO" />
-    </Container>
+    </>
   );
 }
 
 export default TodoDetail;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #fbfbfb;
-  position: relative;
-  height: 100%;
-`;
 
 const FlexBox = styled.div`
   display: flex;
@@ -93,7 +83,7 @@ const Header = styled.div`
   background: #ffffff;
   width: 100vw;
   display: flex;
-  position: relative;
+  position: fixed;
   justify-content: center;
   height: 56px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
@@ -105,4 +95,19 @@ const Title = styled.div`
   font-size: 18px;
   height: 56px;
   line-height: 56px;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 56px;
+  padding-top: 26px;
+  overflow-y: scroll;
+`;
+
+const MainImg = styled.img`
+  width: 327px;
+  margin-bottom: 120px;
 `;
