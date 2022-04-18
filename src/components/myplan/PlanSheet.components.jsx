@@ -62,104 +62,80 @@ function PlanSheet({
       });
   };
   return (
-    <span>
-      {register && (
-        <Sheet
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          snapPoints={[300]}
-        >
-          <Sheet.Container>
-            <Sheet.Header />
-            <Sheet.Content
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Title>{title}</Title>
-              <Author>
+    <>
+      <StyledSheet
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        snapPoints={[300]}
+      >
+        <Sheet.Container>
+          <Sheet.Header />
+          <Sheet.Content>
+            <Title>{title}</Title>
+            <Author>
+              {register && (
                 <Text color="black">
                   {date[0]} ~ {date[1]}
                 </Text>
-                <Text color="#929292">{writer_name}</Text>
-              </Author>
-              <StyledButton
-                onClick={() => {
-                  navigate("../todo/plan/" + planId, {
-                    state: { title: title },
-                  });
-                }}
-                underline
-              >
-                <Text>투두 모아보기</Text>
-              </StyledButton>
-              <StyledButton
-                onClick={() => navigate("../main/viewtemplate/" + planId)}
-                underline
-              >
-                <Text>플랜 마켓 가기</Text>
-              </StyledButton>
-              <StyledButton onClick={deletePlan}>
-                <Text color="red">투두 리스트에서 제거하기</Text>
-              </StyledButton>
-            </Sheet.Content>
-          </Sheet.Container>
+              )}
+              <Text color="#929292">{writer_name}</Text>
+            </Author>
 
-          <Sheet.Backdrop />
-        </Sheet>
-      )}
-
-      {buy && (
-        <Sheet
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          snapPoints={[300]}
-        >
-          <Sheet.Container>
-            <Sheet.Header />
-            <Sheet.Content
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Title>{title}</Title>
-              <Text color="#929292" style={{ width: "327px" }}>
-                {writer_name}
-              </Text>
-              {}
+            {buy && (
               <StyledButton onClick={registerPlan} underline>
                 <Text>투두 등록하기</Text>
               </StyledButton>
-              <StyledButton
-                onClick={() => {
-                  navigate("../todo/plan/" + planId, {
-                    state: { title: title },
-                  });
-                }}
-                underline
-              >
-                <Text>투두 모아보기</Text>
-              </StyledButton>
-              <StyledButton
-                onClick={() => navigate("../main/viewtemplate/" + planId)}
-              >
-                <Text>플랜 마켓 가기</Text>
-              </StyledButton>
-            </Sheet.Content>
-          </Sheet.Container>
+            )}
 
-          <Sheet.Backdrop />
-        </Sheet>
-      )}
-    </span>
+            <StyledButton
+              onClick={() => {
+                navigate("../todo/plan/" + planId, {
+                  state: { title: title },
+                });
+              }}
+              underline
+            >
+              <Text>투두 모아보기</Text>
+            </StyledButton>
+
+            <StyledButton
+              onClick={() => navigate("../main/viewtemplate/" + planId)}
+              underline={register}
+            >
+              <Text>플랜 마켓 가기</Text>
+            </StyledButton>
+
+            {register && (
+              <StyledButton onClick={deletePlan}>
+                <Text color="red">투두 리스트에서 제거하기</Text>
+              </StyledButton>
+            )}
+          </Sheet.Content>
+        </Sheet.Container>
+
+        <Sheet.Backdrop
+          onTap={() => {
+            setIsOpen(false);
+          }}
+        />
+      </StyledSheet>
+    </>
   );
 }
 
 export default PlanSheet;
+
+const StyledSheet = styled(Sheet)`
+  .react-modal-sheet-backdrop {
+    border: none;
+  }
+
+  .react-modal-sheet-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
 
 const Title = styled.div`
   font-family: "PretendardMedium";
