@@ -8,6 +8,7 @@ function MyPlanHeader({ current, setCurrent, buyLength, registerLength }) {
   const [open, setOpen] = useState(false);
   const logout = () => {
     localStorage.removeItem("refresh");
+    sessionStorage.removeItem("access");
     navigate("/");
   };
 
