@@ -162,6 +162,7 @@ const BuyButton = styled.button`
   border-radius: 5px;
   color: #ffffff;
   font-family: "PretendardMedium";
+  margin-bottom: 10px;
 
   ${(props) =>
     props.disabled &&
