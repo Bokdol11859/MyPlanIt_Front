@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Loading } from "@nextui-org/react";
 import BottomNavBar from "../globalcomponents/BottomNavBar.components";
 import MyPlanHeader from "./MyPlanHeader.components";
 import MyPlanContent from "./MyPlanContent.components";
@@ -53,7 +52,7 @@ function MyPlan() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        console.log(response);
+        // console.log(response);
         setBuyPlans(response.data.buy_plans ? response.data.buy_plans : []);
         setBuyLength(
           response.data.buy_plans ? response.data.buy_plans.length : 0

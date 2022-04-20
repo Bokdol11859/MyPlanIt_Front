@@ -49,7 +49,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
         icon={<PlusOutlined />}
       />
 
-      <Sheet isOpen={isOpen} onClose={() => setOpen(false)} snapPoints={[250]}>
+      <StyledSheet isOpen={isOpen} onClose={() => setOpen(false)} snapPoints={[250]}>
         <Sheet.Container>
           <Sheet.Header />
           <Sheet.Content>
@@ -67,8 +67,8 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
           </Sheet.Content>
         </Sheet.Container>
 
-        <Sheet.Backdrop />
-      </Sheet>
+        <Sheet.Backdrop onTap={() => setOpen(false)} />
+      </StyledSheet>
     </>
   );
 }
@@ -115,3 +115,9 @@ font-family: "PretendardRegular"
 font-size: 16px;
 color: black;
 `;
+
+const StyledSheet = styled(Sheet)`
+  .react-modal-sheet-backdrop {
+    border: none;
+  }
+`

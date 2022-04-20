@@ -54,8 +54,9 @@ const Day = styled.div`
   width: 30px;
   height: 30px;
   text-align: center;
-  color: ${(props) => (props.today ? "#7965F4" : "black")};
+  color: black;
   color: ${props => props.isWeekend && "#929292"};
+  color: ${(props) => (props.today && "#7965F4")};
 
   span {
     font-size: 16px;

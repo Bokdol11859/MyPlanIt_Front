@@ -17,7 +17,7 @@ function PlanDetail() {
   const [delay, setDelay] = useState([]);
   const [update, setUpdate] = useState(true);
   const [edit, setEdit] = useState(false);
-  const [linkText, setLinkText] = useState(["All", "Progress", "Done"]);
+  const [linkText, setLinkText] = useState(["All", "Uncheck", "Check"]);
   const [data, setData] = useState([]);
   const [editable, setEditable] = useState(true);
 
@@ -38,12 +38,12 @@ function PlanDetail() {
         }
       )
       .then((res) => {
-        console.log(res);
-        const fetchData = res.data;
+        // console.log(res);
+        const objKey = Object.keys(res.data)[0];
+        const fetchData = res.data[objKey];
         const todos = {};
-        fetchData.data.forEach((todo) => {
+        fetchData.forEach((todo) => {
           Object.assign(todo, { plan_id: id });
-          console.log(Object.keys(todo).length);
           if (Object.keys(todo).length === 4) {
             setLinkText(["All"]);
             setEditable(false);
@@ -65,7 +65,7 @@ function PlanDetail() {
   };
 
   return (
-    <Container>
+    <>
       <Header>
         <FlexBox>
           <ArrowBackIosIcon
@@ -149,29 +149,19 @@ function PlanDetail() {
       ) : (
         <BottomNavBar current="TODO" />
       )}
-    </Container>
+    </>
   );
 }
 
 export default PlanDetail;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #fbfbfb;
-  position: relative;
-  height: 100%;
-`;
-
 const TodoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 100px;
   margin-bottom: 100px;
-  width: 327px;
+  width: 100%;
   overflow-y: scroll;
   font-family: "PretendardSemiBold";
 `;
@@ -187,7 +177,7 @@ const Header = styled.div`
   background: #fbfbfb;
   width: 100vw;
   display: flex;
-  position: relative;
+  position: fixed;
   align-items: center;
   flex-direction: column;
 `;
@@ -257,9 +247,10 @@ const PlanHeader = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `;
+
 const Date = styled.span`
   font-size: 16px;
   font-family: "PretendardRegular";
   font-weight: 600;
-  padding: 0 12px;
+  padding: 0;
 `;

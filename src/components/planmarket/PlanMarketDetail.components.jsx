@@ -1,22 +1,70 @@
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 function PlanMarketDetail() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [plan, setPlan] = useState([]);
-  const fetchUsers = async () => {
+  const [open, setOpen] = useState(false);
+  const fetchPlan = async () => {
     try {
-      const response = await axios.get("https://myplanit.link/plans");
-      setPlan(response.data.Growth[0]);
+      const response = await axios.get("https://myplanit.link/plans/" + id);
+      setPlan(response.data);
     } catch (e) {
       console.log(e);
     }
   };
+
   useEffect(() => {
-    fetchUsers();
+    fetchPlan();
   }, []);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const accessToken = sessionStorage.getItem("access");
+  const handleClose = (event, reason) => {
+    if (reason && reason == "backdropClick") return;
+    axios
+      .all([
+        axios.post(
+          "https://myplanit.link/plans/" + id + "/buy",
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        ),
+        axios.post(
+          "https://myplanit.link/myplans/" + id + "/register",
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        ),
+      ])
+      .then((response) => {
+        navigate("/todo");
+      });
+    setOpen(false);
+  };
+
   return (
-    <Container>
+    <>
       <MainImage src={plan.intro_img_url} />
       <PlanInfo>
         <Title>{plan.name}</Title>
@@ -25,9 +73,13 @@ function PlanMarketDetail() {
             <Tag key={i}>{tag}</Tag>
           ))}
           <Dot />
-          <Text color="#929292" size="12px">기간 4주</Text>
+          <Text color="#929292" size="12px">
+            기간 4주
+          </Text>
           <Dot />
-          <Text color="#929292" size="12px">무료</Text>
+          <Text color="#929292" size="12px">
+            무료
+          </Text>
         </Info>
       </PlanInfo>
 
@@ -40,22 +92,18 @@ function PlanMarketDetail() {
       </ProfileContainer>
 
       <PlanIntro>
-        <Text size="16px" font="PretendardMideum" margin="20px">플랜 소개</Text>
+        <Text size="16px" font="PretendardMideum" margin="20px">
+          플랜 소개
+        </Text>
       </PlanIntro>
-    </Container>
+    </>
   );
 }
 
 export default PlanMarketDetail;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #fbfbfb;
-  position: relative;
-  height: 100vh;
+const MainImg = styled.img`
+  width: 100%;
 `;
 
 const Dot = styled.div`
@@ -67,11 +115,12 @@ const Dot = styled.div`
 `;
 
 const Text = styled.div`
-  color: ${props => props.color || "#000000"};
-  font-family: ${props => props.font || "PretendardRegular"};
-  font-size: ${props => props.size};
-  margin-bottom: ${props => props.margin};
+  color: ${(props) => props.color || "#000000"};
+  font-family: ${(props) => props.font || "PretendardRegular"};
+  font-size: ${(props) => props.size};
+  margin-bottom: ${(props) => props.margin};
 `;
+
 
 const MainImage = styled.img`
   width: 375px;
@@ -144,7 +193,7 @@ const ProfileText = styled.div`
 `;
 
 const PlanIntro = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 327px;
-`
+  display: flex;
+  flex-direction: column;
+  width: 327px;
+`;
