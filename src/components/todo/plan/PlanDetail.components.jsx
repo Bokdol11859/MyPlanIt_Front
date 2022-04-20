@@ -17,7 +17,7 @@ function PlanDetail() {
   const [delay, setDelay] = useState([]);
   const [update, setUpdate] = useState(true);
   const [edit, setEdit] = useState(false);
-  const [linkText, setLinkText] = useState(["All", "Progress", "Done"]);
+  const [linkText, setLinkText] = useState(["All", "Uncheck", "Check"]);
   const [data, setData] = useState([]);
   const [editable, setEditable] = useState(true);
 
@@ -38,12 +38,12 @@ function PlanDetail() {
         }
       )
       .then((res) => {
-        console.log(res);
-        const fetchData = res.data;
+        // console.log(res);
+        const objKey = Object.keys(res.data)[0];
+        const fetchData = res.data[objKey];
         const todos = {};
-        fetchData.data.forEach((todo) => {
+        fetchData.forEach((todo) => {
           Object.assign(todo, { plan_id: id });
-          console.log(Object.keys(todo).length);
           if (Object.keys(todo).length === 4) {
             setLinkText(["All"]);
             setEditable(false);

@@ -14,7 +14,7 @@ function GoogleSocial() {
         const data = response.data;
         const status = response.status;
         sessionStorage.setItem("access", data.django_token.access);
-        sessionStorage.setItem("refresh", data.django_token.refresh);
+        localStorage.setItem("refresh", data.django_token.refresh);
         navigate("/todo");
       })
       .catch((error) => {

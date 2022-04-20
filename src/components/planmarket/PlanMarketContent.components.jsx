@@ -16,7 +16,7 @@ function PlanMarketContent({ plans }) {
           writer_intro={plan.writer_intro}
           desc={plan.desc}
           tags={plan.tags}
-          onClick={() => navigate("../main/viewtemplate/" + plan.id)}
+          onClick={() => navigate("/planmarket/plan/" + plan.id)}
         />
       ))}
     </Container>

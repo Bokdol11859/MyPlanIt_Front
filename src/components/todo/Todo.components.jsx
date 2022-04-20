@@ -7,6 +7,7 @@ import TodoPlan from "./TodoPlan.components";
 import TodoMy from "./TodoMy.components";
 import EditFooter from "./EditFooter.components";
 import LoadingScreen from "../globalcomponents/Loading.components";
+import ErrorHandle from "../globalcomponents/ErrorHandler.components";
 
 function Todo() {
   const accessToken = sessionStorage.getItem("access");
@@ -22,7 +23,7 @@ function Todo() {
   const [current, setCurrent] = useState("PLAN");
   const [planData, setPlanData] = useState();
   const [myTodoData, setMyTodoData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [edit, setEdit] = useState(false);
   const [delay, setDelay] = useState([]);
@@ -33,8 +34,6 @@ function Todo() {
         .get(
           `https://myplanit.link/todos/plan/${format(selectedDate, "yyyy-MM-dd")}`,
           {
-            Authorization: `Bearer ${accessToken}`,
-            withCredentials: true,
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${accessToken}`,
@@ -43,10 +42,10 @@ function Todo() {
         )
         .then((response) => {
           setPlanData(Object.entries(response.data));
+          setLoading(false);
         });
     } catch (err) {
       setError(err);
-      console.log(err);
     }
   };
 
@@ -56,8 +55,6 @@ function Todo() {
         .get(
           `https://myplanit.link/todos/my/${format(selectedDate, "yyyy-MM-dd")}`,
           {
-            Authorization: `Bearer ${accessToken}`,
-            withCredentials: true,
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${accessToken}`,
@@ -66,27 +63,31 @@ function Todo() {
         )
         .then((response) => {
           setMyTodoData(response.data.personal_todos);
+          setLoading(false);
         });
     } catch (err) {
       setError(err);
-      console.log(err);
     }
   };
 
   useEffect(() => {
-    fetchPlan();
-    setEdit(false);
-    setDelay([]);
-  }, [selectedDate, update]);
+    if (current === "PLAN") {
+      fetchPlan();
+      setEdit(false);
+      setDelay([]);
+    }
+  }, [current, selectedDate, update]);
 
   useEffect(() => {
-    fetchMyTodo();
-    setEdit(false);
-    setDelay([]);
-  }, [selectedDate, updateMy]);
+    if (current === "MY") {
+      fetchMyTodo();
+      setEdit(false);
+      setDelay([]);
+    }
+  }, [current, selectedDate, updateMy]);
 
+  if (error) return <ErrorHandle error={error} />
   if (loading) return <LoadingScreen />;
-  if (error) return <div>에러가 발생했습니다</div>;
 
   return (
     <>
