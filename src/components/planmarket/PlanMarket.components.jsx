@@ -11,7 +11,7 @@ function PlanMarket() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchPlans = async () => {
       try {
         setLoading(true);
         const response = await axios.get("https://myplanit.link/plans");
@@ -23,7 +23,7 @@ function PlanMarket() {
       setLoading(false);
     };
 
-    fetchUsers();
+    fetchPlans();
   }, []);
 
   if (loading)

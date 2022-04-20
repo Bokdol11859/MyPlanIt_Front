@@ -99,7 +99,7 @@ function PlanSheet({
             </StyledButton>
 
             <StyledButton
-              onClick={() => navigate("../main/viewtemplate/" + planId)}
+              onClick={() => navigate("/planmarket/plan/" + planId)}
               underline={register}
             >
               <Text>플랜 마켓 가기</Text>

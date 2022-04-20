@@ -14,6 +14,7 @@ import MyPlan from "./components/myplan/MyPlan.components";
 import TodoDetail from "./components/todo/detail/TodoDetail.components";
 import PlanDetail from "./components/todo/plan/PlanDetail.components";
 import PlanMarket from "./components/planmarket/PlanMarket.components";
+import PlanMarketDetail from "./components/planmarket/PlanMarketDetailOld.components";
 import Proposal from "./components/proposal/Proposal.components";
 import KakaoSocial from "./components/social/KakaoSocial.components";
 import GoogleSocial from "./components/social/GoogleSocial.components";
@@ -39,6 +40,7 @@ function App() {
         <Route path="/planmarket" element={<PlanMarket />} />
         <Route path="/proposal" element={<Proposal />} />
 
+        <Route path="/planmarket/plan/:id" element={<PlanMarketDetail />} />
         <Route path="/main/viewtemplate/:id" element={<ViewTemplate />} />
         <Route path="/main/searchtemplate" element={<SearchTemplate />} />
 
