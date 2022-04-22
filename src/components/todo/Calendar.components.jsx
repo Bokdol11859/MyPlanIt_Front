@@ -4,8 +4,9 @@ import { ko } from "date-fns/locale";
 import DateFnsUtils from "@date-io/date-fns";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "styled-components";
+import { format, isSameDay, isWeekend } from "date-fns";
 
-function Calendar({ selectedDate, setSelectedDate }) {
+function Calendar({ selectedDate, setSelectedDate, days }) {
   const handleDateChange = (date) => {
     sessionStorage.setItem("date", date);
     setSelectedDate(new Date(sessionStorage.getItem("date")));
@@ -25,6 +26,27 @@ function Calendar({ selectedDate, setSelectedDate }) {
           margin="normal"
           value={selectedDate}
           onChange={handleDateChange}
+          renderDay={(day, selectedDay, dayInCurrentMonth, dayComponent) => {
+            const todoExist =
+              dayInCurrentMonth && days.includes(format(day, "yyyy-MM-dd"));
+            return (
+              <div
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {todoExist && (
+                  <Dot
+                    today={isSameDay(day, new Date())}
+                    isWeekend={isWeekend(day)}
+                  />
+                )}
+                {dayComponent}
+              </div>
+            );
+          }}
         />
       </MuiPickersUtilsProvider>
     </Container>
@@ -44,4 +66,16 @@ const Container = styled.div`
 const StyledDatePicker = styled(DatePicker)`
   width: auto;
   font-family: "PretendardSemiBold";
+`;
+
+const Dot = styled.div`
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  background: black;
+  background: ${(props) => props.isWeekend && "#929292"};
+  background: ${(props) => props.today && "#7965f4"};
+  top: 5px;
+  border-radius: 100%;
+  z-index: 3;
 `;

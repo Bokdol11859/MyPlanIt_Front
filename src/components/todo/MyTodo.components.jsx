@@ -72,7 +72,7 @@ const TodoCard = styled.div`
   padding: 10px 20px;
   border-radius: 4px;
   width: 327px;
-  height: 52px;
+  min-height: 52px;
   margin-top: 9px;
   display: flex;
   align-items: center;

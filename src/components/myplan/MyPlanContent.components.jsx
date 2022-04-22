@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PlanCard from "./PlanCard.components";
 import PlanSheet from "./PlanSheet.components";
 
-function MyPlanContent({ plans, register, buy }) {
+function MyPlanContent({ plans, register, buy, update, setUpdate }) {
   const [isOpen, setIsOpen] = useState(false);
   const [plan, setPlan] = useState({});
   const [date, setDate] = useState({});
@@ -38,6 +38,8 @@ function MyPlanContent({ plans, register, buy }) {
           writer_name={plan.writer_name}
           date={date}
           register
+          update={update}
+          setUpdate={setUpdate}
         />
       )}
 
@@ -50,6 +52,8 @@ function MyPlanContent({ plans, register, buy }) {
           writer_name={plan.writer_name}
           is_registered={registered}
           buy
+          update={update}
+          setUpdate={setUpdate}
         />
       )}
     </Container>

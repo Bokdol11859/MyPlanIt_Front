@@ -9,7 +9,7 @@ function MyPlanHeader({ current, setCurrent, buyLength, registerLength }) {
   const logout = () => {
     localStorage.removeItem("refresh");
     sessionStorage.removeItem("access");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -39,7 +39,7 @@ function MyPlanHeader({ current, setCurrent, buyLength, registerLength }) {
         </Styled.LowerHeader>
       </Styled.Header>
 
-      <Styled.StyledSheet isOpen={open} snapPoints={[200]}>
+      <Styled.StyledSheet isOpen={open} snapPoints={[250]}>
         <Sheet.Container>
           <Sheet.Header />
 

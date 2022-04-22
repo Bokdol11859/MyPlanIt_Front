@@ -4,19 +4,19 @@ import {
   startOfWeek,
   eachDayOfInterval,
   isSameDay,
-  isSunday,
-  isSaturday,
-  isWeekend
+  isWeekend,
 } from "date-fns";
 import styled from "styled-components";
 
-function WeekCalendar({ selectedDate, setSelectedDate }) {
+function WeekCalendar({ selectedDate, setSelectedDate, days }) {
   const endOfWeek = lastDayOfWeek(selectedDate);
   const firstOfWeek = startOfWeek(selectedDate);
   const weekDays = eachDayOfInterval({
     start: firstOfWeek,
     end: endOfWeek,
   });
+
+  const todoExist = (date) => days.includes(format(date, "yyyy-MM-dd"));
 
   return (
     <Calendar>
@@ -28,6 +28,12 @@ function WeekCalendar({ selectedDate, setSelectedDate }) {
           today={isSameDay(date, new Date())}
           isWeekend={isWeekend(date)}
         >
+          {todoExist(date) && (
+            <Dot
+              isWeekend={isWeekend(date)}
+              today={isSameDay(date, new Date())}
+            />
+          )}
           <span>{format(date, "d")}</span>
         </Day>
       ))}
@@ -51,12 +57,12 @@ const Day = styled.div`
   align-items: center;
   position: relative;
   padding: 5px;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   text-align: center;
   color: black;
-  color: ${props => props.isWeekend && "#929292"};
-  color: ${(props) => (props.today && "#7965F4")};
+  color: ${(props) => props.isWeekend && "#929292"};
+  color: ${(props) => props.today && "#7965F4"};
 
   span {
     font-size: 16px;
@@ -76,9 +82,21 @@ const Day = styled.div`
     left: 0;
     content: "";
     background-color: #e1dcfe;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     border-radius: 100%;
     z-index: 1;
   }`}
+`;
+
+const Dot = styled.div`
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  background: black;
+  background: ${(props) => props.isWeekend && "#929292"};
+  background: ${(props) => props.today && "#7965f4"};
+  top: 5px;
+  border-radius: 100%;
+  z-index: 3;
 `;
