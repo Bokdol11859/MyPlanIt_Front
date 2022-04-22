@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "antd";
 import styled from "styled-components";
 import WeekCalendar from "./WeekCalendar.components";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function TodoHeader({
   selectedDate,
@@ -12,8 +14,31 @@ function TodoHeader({
   current,
   setCurrent,
   setDelay,
+  updateMy,
+  update,
 }) {
+  const accessToken = sessionStorage.getItem("access");
   const linkText = ["PLAN", "MY"];
+  const [days, setDays] = useState([]);
+
+  const fetchDays = () => {
+    axios
+      .get("https://myplanit.link/todos/allofdate", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        const planDays = res.data.plan_todos.map((item) => item.date);
+        const myPlanDays = res.data.personal_todos.map((item) => item.date);
+        const dayList = [...new Set([...planDays, ...myPlanDays])];
+        setDays(dayList);
+      });
+  };
+
+  useEffect(() => {
+    fetchDays();
+  }, [update, updateMy]);
 
   return (
     <HeaderContainer>
@@ -21,6 +46,7 @@ function TodoHeader({
         <Calendar
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
+          days={days}
         />
         <Link to="../myplan">
           <StyledButton>MY PLAN</StyledButton>
@@ -30,6 +56,7 @@ function TodoHeader({
       <WeekCalendar
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
+        days={days}
       />
 
       <LowerHeader>
