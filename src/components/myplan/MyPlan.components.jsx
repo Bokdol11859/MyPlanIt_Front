@@ -14,6 +14,7 @@ function MyPlan() {
   const [error, setError] = useState(null);
   const [buyLength, setBuyLength] = useState(0);
   const [registerLength, setRegisterLength] = useState(0);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     const fetchRegisterPlans = async () => {
@@ -64,7 +65,7 @@ function MyPlan() {
     };
 
     fetchBuyPlans();
-  }, []);
+  }, [update]);
 
   if (error) return error;
 
@@ -85,9 +86,9 @@ function MyPlan() {
         registerLength={registerLength}
       />
 
-      {current === "BUY" && <MyPlanContent plans={buyPlans} buy />}
+      {current === "BUY" && <MyPlanContent plans={buyPlans} update={update} setUpdate={setUpdate} buy />}
       {current === "REGISTER" && (
-        <MyPlanContent plans={registerPlans} register />
+        <MyPlanContent plans={registerPlans} update={update} setUpdate={setUpdate} register />
       )}
 
       <BottomNavBar current="TODO" />

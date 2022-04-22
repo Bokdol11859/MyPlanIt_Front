@@ -15,6 +15,8 @@ function PlanSheet({
   buy,
   date,
   is_registered,
+  update,
+  setUpdate
 }) {
   const navigate = useNavigate();
   const accessToken = sessionStorage.getItem("access");
@@ -57,7 +59,8 @@ function PlanSheet({
           },
         }
       ).then((res) => {
-        window.location.reload();
+        setUpdate(!update);
+        setIsOpen(false);
       })
   };
   return (
