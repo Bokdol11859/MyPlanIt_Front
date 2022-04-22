@@ -22,7 +22,7 @@ function PlanSheet({
   const registerPlan = () => {
     axios
       .post(
-        "https://myplanit.link/myplans/" + planId + "/register",
+        `https://myplanit.link/myplans/${planId}/register`,
         {},
         {
           headers: {
@@ -56,10 +56,9 @@ function PlanSheet({
             Authorization: `Bearer ${accessToken}`,
           },
         }
-      )
-      .then((response) => {
-        navigate("/todo");
-      });
+      ).then((res) => {
+        window.location.reload();
+      })
   };
   return (
     <>
