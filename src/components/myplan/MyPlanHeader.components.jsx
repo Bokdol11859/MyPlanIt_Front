@@ -9,7 +9,7 @@ function MyPlanHeader({ current, setCurrent, buyLength, registerLength }) {
   const logout = () => {
     localStorage.removeItem("refresh");
     sessionStorage.removeItem("access");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
