@@ -8,26 +8,20 @@ function ErrorHandler({ error }) {
   useEffect(() => {
     if (error.response.status === 401) {
       axios
-        .post("https://myplanit.link/api/token/verify", {
-          token: localStorage.getItem("refresh"),
+        .post("https://myplanit.link/api/token/refresh", {
+          refresh: localStorage.getItem("refresh"),
         })
         .then((res) => {
-          if (res.status == 200) {
-            axios
-              .post("https://myplanit.link/api/token/refresh", {
-                refresh: localStorage.getItem("refresh"),
-              })
-              .then((res) => {
-                const access = res.data.access;
-                sessionStorage.setItem("access", access);
-                navigate(-1);
-              });
-          }
+          const access = res.data.access;
+          sessionStorage.setItem("access", access);
+          navigate(-1);
         })
         .catch((err) => {
-          localStorage.removeItem("refresh");
-          navigate('/');
-        });
+          if (err.response.status === 401) {
+            localStorage.removeItem("refresh");
+            navigate('/login');
+          }
+        })
     }
   });
 
