@@ -87,7 +87,7 @@ function EditFooter({
     <Styled.Footer>
       {current != "MY" && (
         <Styled.Button onClick={advanceTodo}>
-          <img src={constants.DO_TOMORROW} height="19" />
+          <img src={constants.ADVANCE} height="19" />
           <Styled.NavText>하루 앞당기기</Styled.NavText>
         </Styled.Button>
       )}
