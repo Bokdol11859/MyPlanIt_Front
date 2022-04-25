@@ -5,6 +5,8 @@ import {
   eachDayOfInterval,
   isSameDay,
   isWeekend,
+  nextSunday,
+  previousSaturday
 } from "date-fns";
 import styled from "styled-components";
 
@@ -17,9 +19,12 @@ function WeekCalendar({ selectedDate, setSelectedDate, days }) {
   });
 
   const todoExist = (date) => days.includes(format(date, "yyyy-MM-dd"));
+  const nextWeek = () => setSelectedDate(nextSunday(selectedDate));
+  const previousWeek = () => setSelectedDate(previousSaturday(selectedDate));
 
   return (
     <Calendar>
+      <ArrowButton src="/images/arrow.svg" onClick={previousWeek} />
       {weekDays.map((date, i) => (
         <Day
           onClick={() => setSelectedDate(date)}
@@ -37,6 +42,7 @@ function WeekCalendar({ selectedDate, setSelectedDate, days }) {
           <span>{format(date, "d")}</span>
         </Day>
       ))}
+      <ArrowButton src="/images/arrow.svg" right onClick={nextWeek} />
     </Calendar>
   );
 }
@@ -100,3 +106,8 @@ const Dot = styled.div`
   border-radius: 100%;
   z-index: 3;
 `;
+
+const ArrowButton = styled.img`
+  ${props => props.right &&
+  `transform: scaleX(-1);`}
+`

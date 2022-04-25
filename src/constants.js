@@ -7,6 +7,7 @@ const constants = {
   NO_PLAN_IMG: "/images/plan.png",
   NO_TODO_IMG: "/images/my.png",
   DO_TOMORROW: "/images/do_tomorrow.svg",
+  ADVANCE: "/images/advance.svg",
   DELETE: "/images/delete.svg",
   DETAIL_ICON: "/images/detail.svg",
   PROPOSAL: "/images/proposal.svg"
