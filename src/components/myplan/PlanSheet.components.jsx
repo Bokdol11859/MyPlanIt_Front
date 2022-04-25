@@ -1,9 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sheet from "react-modal-sheet";
 import axios from "axios";
 import styled from "styled-components";
-import constants from "../../constants";
+import MyPlanModal from "./MyPlanModal.components";
 
 function PlanSheet({
   isOpen,
@@ -14,12 +14,13 @@ function PlanSheet({
   register,
   buy,
   date,
-  is_registered,
   update,
-  setUpdate
+  setUpdate,
 }) {
   const navigate = useNavigate();
   const accessToken = sessionStorage.getItem("access");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("register");
 
   const registerPlan = () => {
     axios
@@ -34,9 +35,11 @@ function PlanSheet({
         }
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.status === 202) {
-          alert("이미 등록한 플랜입니다");
+          setModalType("register");
+          setModalOpen(true);
+          setIsOpen(false);
         } else {
           navigate("/todo");
         }
@@ -44,7 +47,6 @@ function PlanSheet({
   };
 
   const deletePlan = () => {
-    if (!window.confirm("정말 제거하시겠습니까?")) return;
     axios
       .post(
         `https://myplanit.link/myplans/${planId}/delete`,
@@ -58,11 +60,14 @@ function PlanSheet({
             Authorization: `Bearer ${accessToken}`,
           },
         }
-      ).then((res) => {
+      )
+      .then((res) => {
         setUpdate(!update);
+        setModalOpen(false);
         setIsOpen(false);
-      })
+      });
   };
+  
   return (
     <>
       <StyledSheet
@@ -108,7 +113,11 @@ function PlanSheet({
             </StyledButton>
 
             {register && (
-              <StyledButton onClick={deletePlan}>
+              <StyledButton onClick={() => {
+                setModalType("delete");
+                setModalOpen(true);
+                setIsOpen(false);
+              }}>
                 <Text color="red">투두 리스트에서 제거하기</Text>
               </StyledButton>
             )}
@@ -121,6 +130,13 @@ function PlanSheet({
           }}
         />
       </StyledSheet>
+
+      <MyPlanModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        type={modalType}
+        deletePlan={deletePlan}
+      />
     </>
   );
 }

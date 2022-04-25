@@ -120,6 +120,7 @@ function PlanMarketDetail() {
           <DialogButton width="240px" height="52px" onClick={buyPlan}>
             내 투두에 추가하기
           </DialogButton>
+          <CancelButton onClick={() => setOpen(false)}>취소하기</CancelButton>
         </DialogActions>
       </StyledDialog>
     </>
@@ -184,7 +185,7 @@ const StyledDialog = styled(Dialog)`
     #alert-dialog-description {
       font-size: 12px;
       font-family: "PretendardMedium";
-      textAlign: center;
+      text-align: center;
       color: #929292;
     }
 `
@@ -198,11 +199,15 @@ const DialogButton = styled.button`
   border-radius: 5px;
   color: #ffffff;
   font-family: "PretendardMedium";
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 `;
 
 const DialogImg = styled.img`
   width: 60px;
   height: 60px;
   margin: 40px auto 10px;
+`;
+
+const CancelButton = styled(DialogButton)`
+  background: #c4c4c4;
 `;
