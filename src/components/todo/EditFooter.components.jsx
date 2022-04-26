@@ -68,6 +68,24 @@ function EditFooter({
     }
   };
 
+  const advanceMyTodo = () => {
+    for (let i = 0; i < delay.length; i++) {
+      axios
+        .post(
+          `https://myplanit.link/todos/my/${delay[i]}/advance`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then(() => {
+          setUpdateMy(!updateMy);
+        });
+    }
+  };
+
   const deleteTodo = () => {
     for (let i = 0; i < delay.length; i++) {
       axios
@@ -82,15 +100,13 @@ function EditFooter({
         });
     }
   };
-  
+
   return (
     <Styled.Footer>
-      {current != "MY" && (
-        <Styled.Button onClick={advanceTodo}>
-          <img src={constants.ADVANCE} height="19" />
-          <Styled.NavText>하루 앞당기기</Styled.NavText>
-        </Styled.Button>
-      )}
+      <Styled.Button onClick={current == "MY" ? advanceMyTodo : advanceTodo}>
+        <img src={constants.ADVANCE} height="19" />
+        <Styled.NavText>하루 앞당기기</Styled.NavText>
+      </Styled.Button>
       <Styled.Button onClick={current == "MY" ? delayMyTodo : delayTodo}>
         <img src={constants.DO_TOMORROW} height="19" />
         <Styled.NavText>하루 미루기</Styled.NavText>
