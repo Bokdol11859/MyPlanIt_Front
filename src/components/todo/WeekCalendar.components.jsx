@@ -5,8 +5,7 @@ import {
   eachDayOfInterval,
   isSameDay,
   isWeekend,
-  nextSunday,
-  previousSaturday
+  addWeeks
 } from "date-fns";
 import styled from "styled-components";
 
@@ -19,8 +18,8 @@ function WeekCalendar({ selectedDate, setSelectedDate, days }) {
   });
 
   const todoExist = (date) => days.includes(format(date, "yyyy-MM-dd"));
-  const nextWeek = () => setSelectedDate(nextSunday(selectedDate));
-  const previousWeek = () => setSelectedDate(previousSaturday(selectedDate));
+  const nextWeek = () => setSelectedDate(addWeeks(selectedDate, 1));
+  const previousWeek = () => setSelectedDate(addWeeks(selectedDate, -1));
 
   return (
     <Calendar>

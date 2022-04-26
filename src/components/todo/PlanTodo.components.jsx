@@ -4,19 +4,12 @@ import axios from "axios";
 import constants from "../../constants";
 import styled from "styled-components";
 
-function PlanTodo({
-  todo,
-  update,
-  setUpdate,
-  edit,
-  delay,
-  setDelay,
-}) {
+function PlanTodo({ todo, update, setUpdate, edit, delay, setDelay }) {
   const navigate = useNavigate();
   const todoName = todo["plan_todo"];
   const isChecked = todo["finish_flag"];
   const selected = delay.includes(todo["id"]);
-  const accessToken = sessionStorage.getItem("access")
+  const accessToken = sessionStorage.getItem("access");
   const checkTodo = async (todo) => {
     axios
       .post(
@@ -58,7 +51,9 @@ function PlanTodo({
           alignItems: "center",
           opacity: isChecked && edit ? "0.4" : 1,
         }}
-        onClick={() => !edit && navigate(`/todo/detail/${todo["plan_todo_id"]}`)}
+        onClick={() =>
+          !edit && navigate(`/todo/detail/${todo["plan_todo_id"]}`)
+        }
       >
         <span style={{ fontFamily: "PretendardMedium" }}>{todoName}</span>
         <DetailIcon src={constants.DETAIL_ICON} />
@@ -75,11 +70,23 @@ const Container = styled.div`
   margin-top: 5px;
   margin-left: 0 !important;
   display: flex;
+  justify-content: center;
   align-items: center;
-  border-radius: 4px;
+
   box-sizing: border-box;
 
-  border: 1.5px solid ${(props) => (props.selected ? "#8977f7" : "transparent")};
+  ${(props) =>
+    props.selected &&
+    `
+      &::before {
+        content: "";
+        border: 1.5px solid #8977f7;
+        border-radius: 4px;
+        width: 300px;
+        height: 40px;
+        position: absolute;
+      }
+    `}
 `;
 
 const StyledCheckbox = styled(Checkbox)`
