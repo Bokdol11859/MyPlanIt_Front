@@ -99,6 +99,8 @@ function Todo() {
         current={current}
         setCurrent={setCurrent}
         setDelay={setDelay}
+        updateMy={updateMy}
+        update={update}
       />
 
       {current === "PLAN" && (

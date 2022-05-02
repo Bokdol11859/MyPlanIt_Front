@@ -102,16 +102,12 @@ function PlanMarketDetail() {
       >
         <DialogImg src="/images/celebrate.png" />
 
-        <DialogTitle
-          id="alert-dialog-title"
-        >
+        <DialogTitle id="alert-dialog-title">
           {"짠! 지금은 무료체험 기간이에요."}
         </DialogTitle>
 
         <DialogContent>
-          <DialogContentText
-            id="alert-dialog-description"
-          >
+          <DialogContentText id="alert-dialog-description">
             선택하신 플랜을 무료로 사용해보세요!
           </DialogContentText>
         </DialogContent>
@@ -120,6 +116,7 @@ function PlanMarketDetail() {
           <DialogButton width="240px" height="52px" onClick={buyPlan}>
             내 투두에 추가하기
           </DialogButton>
+          <CancelButton onClick={() => setOpen(false)}>취소하기</CancelButton>
         </DialogActions>
       </StyledDialog>
     </>
@@ -162,6 +159,7 @@ const BuyButton = styled.button`
   border-radius: 5px;
   color: #ffffff;
   font-family: "PretendardMedium";
+  margin-bottom: 10px;
 
   ${(props) =>
     props.disabled &&
@@ -172,21 +170,21 @@ const BuyButton = styled.button`
 `;
 
 const StyledDialog = styled(Dialog)`
-    #alert-dialog-title {
-      font-size: 16px;
-      font-family: "PretendardMedium";
-      padding: 12px;
-      width: 260px;
-      text-align: center;
-    }
+  #alert-dialog-title {
+    font-size: 16px;
+    font-family: "PretendardMedium";
+    padding: 12px;
+    width: 260px;
+    text-align: center;
+  }
 
-    #alert-dialog-description {
-      font-size: 12px;
-      font-family: "PretendardMedium";
-      textAlign: center;
-      color: #929292;
-    }
-`
+  #alert-dialog-description {
+    font-size: 12px;
+    font-family: "PretendardMedium";
+    text-align: center;
+    color: #929292;
+  }
+`;
 
 const DialogButton = styled.button`
   width: 220px;
@@ -197,11 +195,24 @@ const DialogButton = styled.button`
   border-radius: 5px;
   color: #ffffff;
   font-family: "PretendardMedium";
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 `;
 
 const DialogImg = styled.img`
   width: 60px;
   height: 60px;
   margin: 40px auto 10px;
+`;
+
+const CancelButton = styled.button`
+  background: #c4c4c4;
+  width: 220px;
+  height: 42px;
+  line-height: 14px;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: "PretendardMedium";
+  margin: 0 0 10px;
+  margin-left: 0px !important;
 `;

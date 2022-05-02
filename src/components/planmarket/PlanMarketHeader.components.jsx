@@ -1,6 +1,5 @@
 import {useNavigate} from "react-router-dom"
 import styled from "styled-components";
-import constants from "../../constants";
 
 function PlanMarketHeader() {
   const navigate = useNavigate();
@@ -9,9 +8,11 @@ function PlanMarketHeader() {
     <Header>
       <Title>플랜</Title>
       <ProposalButton
-        src={constants.PROPOSAL}
         onClick={() => navigate("../proposal")}
-      />
+      >
+        <Text>신청하기</Text>
+        <img src="/images/arrow_icon.svg" />
+      </ProposalButton>
     </Header>
   );
 }
@@ -28,9 +29,10 @@ const Header = styled.div`
   margin: 10px;
 `;
 
-const ProposalButton = styled.img`
+const ProposalButton = styled.div`
   position: absolute;
-  right: 10px;
+  right: 0px;
+  display: flex;
 `;
 
 const Title = styled.div`
@@ -39,3 +41,10 @@ const Title = styled.div`
   height: 30px;
   line-height: 30px;
 `;
+
+const Text = styled.div`
+  color: #8977f7;
+  font-size: 14px;
+  font-family: "PretendardMedium";
+  margin-right: 5px;
+`

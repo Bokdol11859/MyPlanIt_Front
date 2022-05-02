@@ -7,8 +7,7 @@ import styled from "styled-components";
 const BottomNavBar = ({ current }) => {
   return (
     <StyledBottomNavBar showLabels>
-      <BottomNavigationAction
-        style={{ paddingTop: 0 }}
+      <NavBarButton
         icon={
           <>
             <img
@@ -26,8 +25,7 @@ const BottomNavBar = ({ current }) => {
         to="/todo"
       />
 
-      <BottomNavigationAction
-        style={{ paddingTop: 0 }}
+      <NavBarButton
         icon={
           <>
             <img
@@ -65,3 +63,7 @@ const StyledBottomNavBar = styled(BottomNavigation)`
   height: 85px !important;
   filter: drop-shadow(0px -3px 4px rgba(0, 0, 0, 0.04));
 `;
+
+const NavBarButton = styled(BottomNavigationAction)`
+  padding: 0px 12px 8px !important;
+`
