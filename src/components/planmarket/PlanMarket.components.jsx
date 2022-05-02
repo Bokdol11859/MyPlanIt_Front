@@ -9,10 +9,13 @@ function PlanMarket() {
   const [plans, setPlans] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [title, setTitle] = useState("MyPlanIt");
 
   useEffect(() => {
+    document.title = title;
     const fetchPlans = async () => {
       try {
+        setTitle("Plan Market");
         setLoading(true);
         const response = await axios.get("https://myplanit.link/plans");
         const data = response.data;
@@ -24,7 +27,7 @@ function PlanMarket() {
     };
 
     fetchPlans();
-  }, []);
+  }, [title]);
 
   if (loading)
     return (
@@ -35,10 +38,10 @@ function PlanMarket() {
     );
   if (error) return <div>에러가 발생했습니다</div>;
   if (!plans) return null;
-  
+
   return (
     <>
-      <PlanMarketHeader/>
+      <PlanMarketHeader />
 
       <PlanMarketContent plans={plans} />
 
