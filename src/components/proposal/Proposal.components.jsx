@@ -18,10 +18,13 @@ function Proposal() {
   const [update, setUpdate] = useState(false);
   const placeholder = "필요한 플랜을 알려주시면, 다음 플랜으로 준비할게요!";
   const warningText = "필요한 플랜을 입력해주세요!";
+  const [title, setTitle] = useState("Proposal");
 
   useEffect(() => {
+    document.title = title;
     const fetchData = async () => {
       try {
+        setTitle("Proposal");
         setError(null);
         setPlans(null);
         setLoading(true);
@@ -92,10 +95,10 @@ function Proposal() {
           onClick={() => navigate(-1)}
         />
       </Styled.Header>
-      
+
       <Styled.InputArea>
         <Styled.InputField
-          placeholder={warning? warningText: placeholder}
+          placeholder={warning ? warningText : placeholder}
           onChange={(e) => {
             setInputText(e.target.value);
           }}
