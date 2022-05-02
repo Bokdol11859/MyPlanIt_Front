@@ -15,10 +15,13 @@ function MyPlan() {
   const [buyLength, setBuyLength] = useState(0);
   const [registerLength, setRegisterLength] = useState(0);
   const [update, setUpdate] = useState(false);
+  const [title, setTitle] = useState("MyPlanIt");
 
   useEffect(() => {
+    document.title = title;
     const fetchRegisterPlans = async () => {
       try {
+        setTitle("My Plan");
         const response = await axios.get(
           "https://myplanit.link/myplans/registered",
           {
@@ -65,7 +68,7 @@ function MyPlan() {
     };
 
     fetchBuyPlans();
-  }, [update]);
+  }, [update, title]);
 
   if (error) return error;
 
@@ -86,9 +89,21 @@ function MyPlan() {
         registerLength={registerLength}
       />
 
-      {current === "BUY" && <MyPlanContent plans={buyPlans} update={update} setUpdate={setUpdate} buy />}
+      {current === "BUY" && (
+        <MyPlanContent
+          plans={buyPlans}
+          update={update}
+          setUpdate={setUpdate}
+          buy
+        />
+      )}
       {current === "REGISTER" && (
-        <MyPlanContent plans={registerPlans} update={update} setUpdate={setUpdate} register />
+        <MyPlanContent
+          plans={registerPlans}
+          update={update}
+          setUpdate={setUpdate}
+          register
+        />
       )}
 
       <BottomNavBar current="TODO" />

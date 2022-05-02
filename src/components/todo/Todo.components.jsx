@@ -19,7 +19,7 @@ function Todo() {
       ? new Date(sessionStorage.getItem("date"))
       : new Date()
   );
-  
+
   const [current, setCurrent] = useState("PLAN");
   const [planData, setPlanData] = useState();
   const [myTodoData, setMyTodoData] = useState();
@@ -27,12 +27,17 @@ function Todo() {
   const [error, setError] = useState(null);
   const [edit, setEdit] = useState(false);
   const [delay, setDelay] = useState([]);
+  const [title, setTitle] = useState("MyPlanIt");
 
   const fetchPlan = async () => {
     try {
+      setTitle("Plan Todo");
       await axios
         .get(
-          `https://myplanit.link/todos/plan/${format(selectedDate, "yyyy-MM-dd")}`,
+          `https://myplanit.link/todos/plan/${format(
+            selectedDate,
+            "yyyy-MM-dd"
+          )}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -51,9 +56,13 @@ function Todo() {
 
   const fetchMyTodo = async () => {
     try {
+      setTitle("My Todo");
       await axios
         .get(
-          `https://myplanit.link/todos/my/${format(selectedDate, "yyyy-MM-dd")}`,
+          `https://myplanit.link/todos/my/${format(
+            selectedDate,
+            "yyyy-MM-dd"
+          )}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -71,22 +80,25 @@ function Todo() {
   };
 
   useEffect(() => {
+    document.title = title;
+
     if (current === "PLAN") {
       fetchPlan();
       setEdit(false);
       setDelay([]);
     }
-  }, [current, selectedDate, update]);
+  }, [current, selectedDate, update, title]);
 
   useEffect(() => {
+    document.title = title;
     if (current === "MY") {
       fetchMyTodo();
       setEdit(false);
       setDelay([]);
     }
-  }, [current, selectedDate, updateMy]);
+  }, [current, selectedDate, updateMy, title]);
 
-  if (error) return <ErrorHandle error={error} />
+  if (error) return <ErrorHandle error={error} />;
   if (loading) return <LoadingScreen />;
 
   return (
