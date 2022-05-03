@@ -13,27 +13,29 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
   const inputRef = useRef(null);
 
   const addNewTodo = () => {
-    axios
-      .post(
-        `https://myplanit.link/todos/my/${selectedDate.getFullYear()}-${(
-          "0" +
-          (selectedDate.getMonth() + 1)
-        ).slice(-2)}-${("0" + selectedDate.getDate()).slice(-2)}`,
-        {
-          todo_name: todo,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+    if (todo !== "") {
+      axios
+        .post(
+          `https://myplanit.link/todos/my/${selectedDate.getFullYear()}-${(
+            "0" +
+            (selectedDate.getMonth() + 1)
+          ).slice(-2)}-${("0" + selectedDate.getDate()).slice(-2)}`,
+          {
+            todo_name: todo,
           },
-        }
-      )
-      .then(() => {
-        setUpdateMy(!updateMy);
-        setOpen(false);
-        setTodo("");
-      });
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then(() => {
+          setUpdateMy(!updateMy);
+          setOpen(false);
+          setTodo("");
+        });
+    }
   };
 
   return (
@@ -41,7 +43,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
       <OpenAddModal
         onClick={() => {
           setOpen(true);
-          setTimeout(() => inputRef.current.focus(), 200);
+          // setTimeout(() => inputRef.current.focus(), 200);
         }}
         size="large"
         type="primary"
@@ -49,12 +51,15 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
         icon={<PlusOutlined />}
       />
 
-      <StyledSheet isOpen={isOpen} onClose={() => setOpen(false)} snapPoints={[250]}>
+      <StyledSheet
+        isOpen={isOpen}
+        onClose={() => setOpen(false)}
+        snapPoints={[250]}
+      >
         <Sheet.Container>
           <Sheet.Header />
           <Sheet.Content>
             <NewTodoInput
-              className="email-input"
               size="large"
               placeholder="오늘 할 일을 입력해주세요.."
               onChange={(e) => {
@@ -120,4 +125,4 @@ const StyledSheet = styled(Sheet)`
   .react-modal-sheet-backdrop {
     border: none;
   }
-`
+`;
