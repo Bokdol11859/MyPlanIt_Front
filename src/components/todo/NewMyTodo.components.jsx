@@ -44,7 +44,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
       <OpenAddModal
         onClick={() => {
           setOpen(true);
-          // setTimeout(() => inputRef.current.focus(), 200);
+          setTimeout(() => inputRef.current.focus(), 200);
         }}
         size="large"
         type="primary"
@@ -54,7 +54,10 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
 
       <StyledSheet
         isOpen={isOpen}
-        onClose={((e) => e.target.blur(), setOpen(false))}
+        onClose={(e) => {
+          e.target.blur();
+          setOpen(false);
+        }}
         snapPoints={[250]}
       >
         <Sheet.Container>
@@ -73,7 +76,12 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
           </Sheet.Content>
         </Sheet.Container>
 
-        <Sheet.Backdrop onTap={((e) => setOpen(false), e.target.blur())} />
+        <Sheet.Backdrop
+          onTap={(e) => {
+            setOpen(false);
+            e.target.blur();
+          }}
+        />
       </StyledSheet>
     </>
   );
