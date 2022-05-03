@@ -12,13 +12,15 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
   const accessToken = sessionStorage.getItem("access");
   const inputRef = useRef();
 
-  const closeModal = () => {
-    inputRef.current.blur();
-    console.log("blurred");
-    setOpen(false);
-    console.log("closed");
-    setTodo("");
-  };
+  async function closeModal() {
+    await inputRef.current.blur();
+    await setTimeout(() => {
+      console.log("blurred");
+      setOpen(false);
+      console.log("closed");
+      setTodo("");
+    }, 3000);
+  }
 
   const addNewTodo = () => {
     if (todo !== "") {
