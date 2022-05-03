@@ -10,7 +10,15 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
   const [isOpen, setOpen] = useState(false);
   const [todo, setTodo] = useState([]);
   const accessToken = sessionStorage.getItem("access");
-  const inputRef = useRef(null);
+  const inputRef = useRef();
+
+  const closeModal = () => {
+    inputRef.current.blur();
+    console.log("blurred");
+    setOpen(false);
+    console.log("closed");
+    setTodo("");
+  };
 
   const addNewTodo = () => {
     if (todo !== "") {
@@ -30,10 +38,9 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
             },
           }
         )
-        .then((e) => {
+        .then(() => {
           setUpdateMy(!updateMy);
-          e.target.blur();
-          setOpen(false);
+          closeModal();
           setTodo("");
         });
     }
@@ -52,14 +59,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
         icon={<PlusOutlined />}
       />
 
-      <StyledSheet
-        isOpen={isOpen}
-        onClose={(e) => {
-          e.target.blur();
-          setOpen(false);
-        }}
-        snapPoints={[250]}
-      >
+      <StyledSheet isOpen={isOpen} onClose={closeModal} snapPoints={[250]}>
         <Sheet.Container>
           <Sheet.Header />
           <Sheet.Content>
@@ -75,13 +75,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
             <AddButton onClick={addNewTodo}>추가하기</AddButton>
           </Sheet.Content>
         </Sheet.Container>
-
-        <Sheet.Backdrop
-          onTap={(e) => {
-            setOpen(false);
-            e.target.blur();
-          }}
-        />
+        <Sheet.Backdrop onTap={closeModal} />
       </StyledSheet>
     </>
   );
