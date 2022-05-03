@@ -19,7 +19,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
       setOpen(false);
       console.log("closed");
       setTodo("");
-    }, 3000);
+    }, 800);
   }
 
   const addNewTodo = () => {
