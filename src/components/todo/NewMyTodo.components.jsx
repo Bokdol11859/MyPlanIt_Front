@@ -30,8 +30,9 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
             },
           }
         )
-        .then(() => {
+        .then((e) => {
           setUpdateMy(!updateMy);
+          e.target.blur();
           setOpen(false);
           setTodo("");
         });
@@ -53,7 +54,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
 
       <StyledSheet
         isOpen={isOpen}
-        onClose={() => setOpen(false)}
+        onClose={((e) => e.target.blur(), setOpen(false))}
         snapPoints={[250]}
       >
         <Sheet.Container>
@@ -72,7 +73,7 @@ function NewMyTodo({ selectedDate, updateMy, setUpdateMy }) {
           </Sheet.Content>
         </Sheet.Container>
 
-        <Sheet.Backdrop onTap={() => setOpen(false)} />
+        <Sheet.Backdrop onTap={((e) => setOpen(false), e.target.blur())} />
       </StyledSheet>
     </>
   );
