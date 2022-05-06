@@ -6,7 +6,7 @@ import constants from "../../constants";
 
 function RootPage() {
   const navigate = useNavigate();
-    
+
   useEffect(() => {
     const refresh = localStorage.getItem("refresh");
     if (refresh) {
@@ -19,16 +19,20 @@ function RootPage() {
             const access = res.data.access;
             sessionStorage.setItem("access", access);
             navigate("/todo");
+          } else if (res.status === 401) {
+            localStorage.removeItem("refresh");
+            sessionStorage.removeItem("access");
+            navigate("/login");
           }
         })
         .catch((err) => {
           if (err.response.status === 401) {
             localStorage.removeItem("refresh");
+            sessionStorage.removeItem("access");
             navigate("/login");
           }
         });
-    }
-    else {
+    } else {
       navigate("/login");
     }
   }, []);
