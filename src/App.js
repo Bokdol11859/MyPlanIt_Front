@@ -20,6 +20,7 @@ import Proposal from "./components/proposal/Proposal.components";
 import KakaoSocial from "./components/social/KakaoSocial.components";
 import GoogleSocial from "./components/social/GoogleSocial.components";
 import Admin from "./components/admin/admin.components";
+import Copyright from "./components/globalcomponents/Copyright";
 
 function App() {
   return (
@@ -48,6 +49,8 @@ function App() {
 
         <Route path="todo/detail/:id" element={<TodoDetail />} />
         <Route path="/todo/plan/:id" element={<PlanDetail />} />
+
+        <Route path="/copyright" element={<Copyright />} />
       </Routes>
     </div>
   );
