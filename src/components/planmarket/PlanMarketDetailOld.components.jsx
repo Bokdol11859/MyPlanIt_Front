@@ -88,9 +88,9 @@ function PlanMarketDetail() {
 
       <Footer>
         {isRegistered ? (
-          <BuyButton disabled>구매한 플랜입니다</BuyButton>
+          <BuyButton disabled>이미 도전중인 플랜입니다</BuyButton>
         ) : (
-          <BuyButton onClick={handleClickOpen}>지금 바로 구매하기</BuyButton>
+          <BuyButton onClick={handleClickOpen}>도전하기</BuyButton>
         )}
       </Footer>
 
