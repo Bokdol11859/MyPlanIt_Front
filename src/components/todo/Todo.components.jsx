@@ -8,8 +8,11 @@ import TodoMy from "./TodoMy.components";
 import EditFooter from "./EditFooter.components";
 import LoadingScreen from "../globalcomponents/Loading.components";
 import ErrorHandle from "../globalcomponents/ErrorHandler.components";
+import { useNavigate } from "react-router-dom";
 
 function Todo() {
+  const navigate = useNavigate();
+
   const accessToken = sessionStorage.getItem("access");
   const [update, setUpdate] = useState(false);
   const [updateMy, setUpdateMy] = useState(false);
@@ -30,53 +33,50 @@ function Todo() {
   const [title, setTitle] = useState("MyPlanIt");
 
   const fetchPlan = async () => {
-    try {
-      setTitle("Plan Todo");
-      await axios
-        .get(
-          `https://myplanit.link/todos/plan/${format(
-            selectedDate,
-            "yyyy-MM-dd"
-          )}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then((response) => {
-          setPlanData(Object.entries(response.data));
-          setLoading(false);
-        });
-    } catch (err) {
-      setError(err);
-    }
+    setTitle("Plan Todo");
+    await axios
+      .get(
+        `https://myplanit.link/todos/plan/${format(
+          selectedDate,
+          "yyyy-MM-dd"
+        )}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        setPlanData(Object.entries(response.data));
+        setLoading(false);
+      })
+      .catch((res) => {
+        setError(res);
+        navigate("/login");
+      });
   };
 
   const fetchMyTodo = async () => {
-    try {
-      setTitle("My Todo");
-      await axios
-        .get(
-          `https://myplanit.link/todos/my/${format(
-            selectedDate,
-            "yyyy-MM-dd"
-          )}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then((response) => {
-          setMyTodoData(response.data.personal_todos);
-          setLoading(false);
-        });
-    } catch (err) {
-      setError(err);
-    }
+    setTitle("My Todo");
+    await axios
+      .get(
+        `https://myplanit.link/todos/my/${format(selectedDate, "yyyy-MM-dd")}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        setMyTodoData(response.data.personal_todos);
+        setLoading(false);
+      })
+      .catch((res) => {
+        setError(res);
+        navigate("/login");
+      });
   };
 
   useEffect(() => {
@@ -86,17 +86,12 @@ function Todo() {
       fetchPlan();
       setEdit(false);
       setDelay([]);
-    }
-  }, [current, selectedDate, update, title]);
-
-  useEffect(() => {
-    document.title = title;
-    if (current === "MY") {
+    } else if (current === "MY") {
       fetchMyTodo();
       setEdit(false);
       setDelay([]);
     }
-  }, [current, selectedDate, updateMy, title]);
+  }, [current, selectedDate, update, title, updateMy]);
 
   if (error) return <ErrorHandle error={error} />;
   if (loading) return <LoadingScreen />;
