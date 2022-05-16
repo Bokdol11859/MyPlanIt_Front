@@ -34,16 +34,18 @@ export default function Settings() {
             문의하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
           </Styled.Row>
         </SendMail>
-        <Styled.Row>
+        <Styled.Row onClick={() => navigate("/Tos")}>
           이용약관 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        <Styled.Row>
+        <Styled.Row onClick={() => navigate("/Privacy")}>
           개인정보 처리방침 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
         <Styled.Row onClick={() => setOpen(true)}>
           로그아웃 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        <Styled.Row>탈퇴하기</Styled.Row>
+        <Styled.Row>
+          탈퇴하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
+        </Styled.Row>
       </Container>
 
       <Styled.StyledSheet isOpen={open} snapPoints={[250]}>
@@ -73,7 +75,7 @@ const Container = styled.div`
   width: 327px;
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 90px;
 `;
 

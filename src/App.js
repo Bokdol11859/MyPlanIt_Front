@@ -22,6 +22,8 @@ import KakaoSocial from "./components/social/KakaoSocial.components";
 import GoogleSocial from "./components/social/GoogleSocial.components";
 import Admin from "./components/admin/admin.components";
 import Copyright from "./components/globalcomponents/Copyright";
+import Privacy from "./components/settings/privacy.components";
+import Tos from "./components/settings/tos.components";
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
 
         <Route path="/myplan" element={<MyPlan />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/tos" element={<Tos />} />
 
         <Route path="/planmarket" element={<PlanMarket />} />
         <Route path="/proposal" element={<Proposal />} />
