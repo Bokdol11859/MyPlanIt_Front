@@ -12,6 +12,7 @@ import SearchTemplate from "./components/searchtemplate/searchtemplate.component
 import Todo from "./components/todo/Todo.components";
 
 import MyPlan from "./components/myplan/MyPlan.components";
+import Settings from "./components/settings/settings.components";
 import TodoDetail from "./components/todo/detail/TodoDetail.components";
 import PlanDetail from "./components/todo/plan/PlanDetail.components";
 import PlanMarket from "./components/planmarket/PlanMarket.components";
@@ -39,6 +40,7 @@ function App() {
         <Route path="/todo" element={<Todo />} />
 
         <Route path="/myplan" element={<MyPlan />} />
+        <Route path="/settings" element={<Settings />} />
 
         <Route path="/planmarket" element={<PlanMarket />} />
         <Route path="/proposal" element={<Proposal />} />

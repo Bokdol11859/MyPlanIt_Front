@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Sheet from "react-modal-sheet";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Sheet from "react-modal-sheet";
 
 export const Header = styled.div`
   position: fixed;
@@ -29,15 +29,6 @@ export const BackButton = styled(ArrowBackIosIcon)`
   color: black;
 `;
 
-export const LowerHeader = styled.div`
-  display: flex;
-  width: 327px;
-  margin: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  margin-left: 10;
-`;
-
 export const Title = styled.div`
   font-family: "SFProDisplay";
   font-weight: 510;
@@ -46,42 +37,23 @@ export const Title = styled.div`
   line-height: 56px;
 `;
 
-export const LinkButton = styled.button`
-  box-sizing: border-box;
+export const Row = styled.div`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 25px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0px;
-  background-color: #fbfbfb;
-  border-radius: 0;
-  border-width: 0px 0px 0px;
-  font-family: "PretendardMedium";
-  font-size: 16px;
-  margin-right: 15px;
-  padding: 0 0 1px;
-
-  color: ${(props) => (props.selected ? "black" : "#C4C4C4")};
-  border-bottom: ${(props) => (props.selected ? "2px solid #8977f7" : "none")};
-  padding-bottom: ${(props) => (props.selected ? "2px" : "4px")};
+  width: 327px;
 `;
 
-export const SettingBtn = styled.img`
-  position: absolute;
-  right: 0px;
-  width: 25px;
+export const RowSide = styled.span`
+  margin-left: auto;
 `;
-
-export const LogoutBtn = styled.button`
-  position: absolute;
-  right: 0px;
-  background: #ffffff;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
-  border: none;
-  border-radius: 4px;
-  width: 64px;
-  height: 24px;
-  font-size: 10px;
-  font-family: "PretendardMedium";
+export const RowSideIcon = styled.img`
+  height: 20px;
+  margin-left: auto;
+  margin-right: 0;
 `;
 
 export const StyledSheet = styled(Sheet)`
