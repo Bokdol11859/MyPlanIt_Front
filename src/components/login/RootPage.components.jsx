@@ -16,6 +16,7 @@ function RootPage() {
         })
         .then((res) => {
           if (res.status === 200) {
+            console.log(res);
             const access = res.data.access;
             sessionStorage.setItem("access", access);
             navigate("/todo");
