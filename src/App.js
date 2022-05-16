@@ -26,6 +26,7 @@ import Privacy from "./components/settings/privacy.components";
 import Tos from "./components/settings/tos.components";
 import Notice from "./components/settings/notice.components";
 import Unregister from "./components/settings/unregister.components";
+import NoticeDetail from "./components/settings/noticeDetail.components";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/tos" element={<Tos />} />
         <Route path="/notice" element={<Notice />} />
+        <Route path="/noticeDetail" element={<NoticeDetail />} />
         <Route path="/unregister" element={<Unregister />} />
 
         <Route path="/planmarket" element={<PlanMarket />} />

@@ -5,6 +5,7 @@ import BottomNavBar from "../globalcomponents/BottomNavBar.components";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LoadingScreen from "../globalcomponents/Loading.components";
+import NoticeDetail from "./noticeDetail.components";
 
 export default function Notice() {
   const navigate = useNavigate();
@@ -13,10 +14,11 @@ export default function Notice() {
   const [error, setError] = useState(null);
   const [update, setUpdate] = useState(false);
   const [title, setTitle] = useState("MyPlanIt");
+  const [notices, setNotices] = useState([]);
 
   useEffect(() => {
     document.title = title;
-    const fetchRegisterPlans = async () => {
+    const fetchNotices = async () => {
       try {
         setTitle("Notice");
         await axios
@@ -28,7 +30,9 @@ export default function Notice() {
             },
           })
           .then((res) => {
-            console.log(res);
+            console.log(res.data.Notice);
+            setNotices([...res.data.Notice]);
+            console.log(notices);
           });
       } catch (e) {
         setError(e);
@@ -36,7 +40,7 @@ export default function Notice() {
       setLoading(false);
     };
 
-    fetchRegisterPlans();
+    fetchNotices();
   }, [update, title]);
 
   if (error) return error;
@@ -56,8 +60,50 @@ export default function Notice() {
           <Styled.Title>공지사항</Styled.Title>
         </Styled.UpperHeader>
       </Styled.Header>
-
+      <Container>
+        {notices &&
+          notices.map((notice, i) => (
+            <div
+              key={i}
+              onClick={() => {
+                navigate("/noticeDetail", {
+                  state: [notice.title, notice.created_at, notice.content],
+                });
+              }}
+            >
+              <NoticeDate>{notice.created_at}</NoticeDate>
+              <NoticeTitle>{notice.title}</NoticeTitle>
+              <hr />
+            </div>
+          ))}
+      </Container>
       <BottomNavBar current="TODO" />
     </>
   );
 }
+
+const NoticeDate = styled.p`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #929292;
+`;
+const NoticeTitle = styled.p`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 14px;
+`;
+const Container = styled.div`
+  overflow-y: scroll;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
