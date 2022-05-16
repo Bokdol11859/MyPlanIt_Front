@@ -315,7 +315,7 @@ export default function Tos() {
       </Styled.Header>
       <div
         dangerouslySetInnerHTML={{ __html: HTML }}
-        style={{ width: "330px" }}
+        style={{ width: "350px" }}
       />
     </>
   );

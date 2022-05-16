@@ -14,6 +14,7 @@ export default function Settings() {
     sessionStorage.removeItem("access");
     navigate("/login");
   };
+
   return (
     <>
       <Styled.Header>
@@ -26,7 +27,7 @@ export default function Settings() {
         <Styled.Row>
           앱 버전 <Styled.RowSide>1.0.3</Styled.RowSide>
         </Styled.Row>
-        <Styled.Row>
+        <Styled.Row onClick={() => navigate("/Notice")}>
           공지사항 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
         <SendMail href="mailto:myplanit.unicorn@gmail.com">
@@ -43,7 +44,7 @@ export default function Settings() {
         <Styled.Row onClick={() => setOpen(true)}>
           로그아웃 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        <Styled.Row>
+        <Styled.Row onClick={() => navigate("/Unregister")}>
           탈퇴하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
       </Container>
