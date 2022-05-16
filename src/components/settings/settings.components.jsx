@@ -24,14 +24,16 @@ export default function Settings() {
       </Styled.Header>
       <Container>
         <Styled.Row>
-          앱 버전 <Styled.RowSide>1.0.1</Styled.RowSide>
+          앱 버전 <Styled.RowSide>1.0.3</Styled.RowSide>
         </Styled.Row>
         <Styled.Row>
           공지사항 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        <Styled.Row>
-          문의하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
-        </Styled.Row>
+        <SendMail href="mailto:myplanit.unicorn@gmail.com">
+          <Styled.Row>
+            문의하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
+          </Styled.Row>
+        </SendMail>
         <Styled.Row>
           이용약관 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
@@ -73,4 +75,14 @@ const Container = styled.div`
   flex-direction: column;
   margin-top: 100px;
   margin-bottom: 90px;
+`;
+
+const SendMail = styled.a`
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
 `;
