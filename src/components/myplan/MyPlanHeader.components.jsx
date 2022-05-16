@@ -18,9 +18,15 @@ function MyPlanHeader({ current, setCurrent, buyLength, registerLength }) {
         <Styled.UpperHeader>
           <Styled.BackButton onClick={() => navigate(-1)} />
           <Styled.Title>MY PLAN</Styled.Title>
-          <Styled.LogoutBtn onClick={() => setOpen(true)}>
+          <Styled.SettingBtn
+            src="images/settings.png"
+            onClick={() => {
+              navigate("/settings");
+            }}
+          />
+          {/* <Styled.LogoutBtn onClick={() => setOpen(true)}>
             로그아웃
-          </Styled.LogoutBtn>
+          </Styled.LogoutBtn> */}
         </Styled.UpperHeader>
 
         <Styled.LowerHeader>

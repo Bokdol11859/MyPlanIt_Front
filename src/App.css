@@ -52,14 +52,15 @@
 
 .MuiPickersDay-daySelected {
   color: #000 !important;
-  background-color: #E1DCFE !important;
+  background-color: #e1dcfe !important;
 }
 
 .MuiPickersDay-current {
-  color: #7965F4 !important;
+  color: #7965f4 !important;
 }
 
-.MuiTypography-body2, .MuiTypography-caption {
+.MuiTypography-body2,
+.MuiTypography-caption {
   font-family: "PretendardRegular" !important;
   font-size: 14px !important;
 }

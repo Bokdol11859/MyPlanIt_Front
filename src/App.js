@@ -12,6 +12,7 @@ import SearchTemplate from "./components/searchtemplate/searchtemplate.component
 import Todo from "./components/todo/Todo.components";
 
 import MyPlan from "./components/myplan/MyPlan.components";
+import Settings from "./components/settings/settings.components";
 import TodoDetail from "./components/todo/detail/TodoDetail.components";
 import PlanDetail from "./components/todo/plan/PlanDetail.components";
 import PlanMarket from "./components/planmarket/PlanMarket.components";
@@ -21,6 +22,11 @@ import KakaoSocial from "./components/social/KakaoSocial.components";
 import GoogleSocial from "./components/social/GoogleSocial.components";
 import Admin from "./components/admin/admin.components";
 import Copyright from "./components/globalcomponents/Copyright";
+import Privacy from "./components/settings/privacy.components";
+import Tos from "./components/settings/tos.components";
+import Notice from "./components/settings/notice.components";
+import Unregister from "./components/settings/unregister.components";
+import NoticeDetail from "./components/settings/noticeDetail.components";
 
 function App() {
   return (
@@ -39,6 +45,12 @@ function App() {
         <Route path="/todo" element={<Todo />} />
 
         <Route path="/myplan" element={<MyPlan />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/tos" element={<Tos />} />
+        <Route path="/notice" element={<Notice />} />
+        <Route path="/noticeDetail" element={<NoticeDetail />} />
+        <Route path="/unregister" element={<Unregister />} />
 
         <Route path="/planmarket" element={<PlanMarket />} />
         <Route path="/proposal" element={<Proposal />} />
