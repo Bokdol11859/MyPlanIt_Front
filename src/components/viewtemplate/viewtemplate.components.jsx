@@ -131,7 +131,7 @@ function ViewTemplate(props) {
             marginLeft: "auto",
           }}
         >
-          지금 바로 구매하기
+          도전하기
         </button>
         <Dialog
           open={open}
