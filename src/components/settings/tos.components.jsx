@@ -12,14 +12,12 @@ export default function Tos() {
   const HTML = `<h1 style="text-align: center; font-size: 20px; margin-bottom: 30px">
   이용약관
 </h1>
-<hr />
-
+<hr style="border: 0.1px solid grey"/>
 <pre
   style="
     white-space: pre-wrap;
     font-family: Pretendard-Medium;
-    padding-left: 30px;
-    padding-right: 30px;
+    
   "
 >
 제 1장. 총칙
@@ -310,9 +308,10 @@ export default function Tos() {
       <Styled.Header>
         <Styled.UpperHeader>
           <Styled.BackButton onClick={() => navigate(-1)} />
-          <Styled.Title>설정</Styled.Title>
+          <Styled.Title>이용약관</Styled.Title>
         </Styled.UpperHeader>
       </Styled.Header>
+
       <div
         dangerouslySetInnerHTML={{ __html: HTML }}
         style={{ width: "350px" }}

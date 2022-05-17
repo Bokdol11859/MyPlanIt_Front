@@ -73,7 +73,7 @@ export default function Notice() {
             >
               <NoticeDate>{notice.created_at}</NoticeDate>
               <NoticeTitle>{notice.title}</NoticeTitle>
-              <hr />
+              <hr style={{ border: "0.1px solid grey" }} />
             </div>
           ))}
       </Container>
@@ -100,7 +100,7 @@ const NoticeTitle = styled.p`
 const Container = styled.div`
   overflow-y: scroll;
   position: relative;
-  width: 100%;
+  width: 370px;
   display: flex;
   flex-direction: column;
   margin-top: 70px;

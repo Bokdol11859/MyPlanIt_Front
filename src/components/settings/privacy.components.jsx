@@ -11,13 +11,12 @@ export default function Privacy() {
   const HTML = `<h1 style="text-align: center; font-size: 20px; margin-bottom: 30px">
   개인정보처리방침
 </h1>
-<hr />
+<hr style="border: 0.1px solid grey"/>
 <pre
   style="
     white-space: pre-wrap;
     font-family: Pretendard-Medium;
-    padding-left: 30px;
-    padding-right: 30px;
+
   "
 >
 마이플랜잇은 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
@@ -170,7 +169,7 @@ export default function Privacy() {
       <Styled.Header>
         <Styled.UpperHeader>
           <Styled.BackButton onClick={() => navigate(-1)} />
-          <Styled.Title>설정</Styled.Title>
+          <Styled.Title>개인정보 처리방침</Styled.Title>
         </Styled.UpperHeader>
       </Styled.Header>
       <div
