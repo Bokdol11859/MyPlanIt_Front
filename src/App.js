@@ -43,8 +43,8 @@ function App() {
         <Route path="/onboard3" element={<Onboard3 />} />
 
         <Route path="/todo" element={<Todo />} />
-
         <Route path="/myplan" element={<MyPlan />} />
+
         <Route path="/settings" element={<Settings />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/tos" element={<Tos />} />

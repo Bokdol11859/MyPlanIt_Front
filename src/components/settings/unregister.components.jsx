@@ -9,12 +9,13 @@ export default function Unregister() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const accessToken = sessionStorage.getItem("access");
-
+  const refresh = localStorage.getItem("refresh");
   const Unregister = async () => {
     await axios
-      .post("https://myplanit.link/unregister", {
+      .delete("https://myplanit.link/unregister", {
         withCredentials: true,
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
       })
@@ -23,6 +24,9 @@ export default function Unregister() {
         localStorage.removeItem("refresh");
         sessionStorage.removeItem("access");
         navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   return (
@@ -46,7 +50,13 @@ export default function Unregister() {
 
           <Sheet.Content>
             <Styled.Text>탈퇴할까요?</Styled.Text>
-            <Styled.Button onClick={Unregister}>네</Styled.Button>
+            <Styled.Button
+              onClick={() => {
+                Unregister();
+              }}
+            >
+              네
+            </Styled.Button>
             <Styled.Button cancel onClick={() => setOpen(false)}>
               아니오
             </Styled.Button>
