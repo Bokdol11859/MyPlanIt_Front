@@ -44,9 +44,9 @@ export default function Settings() {
         <Styled.Row onClick={() => setOpen(true)}>
           로그아웃 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        {/* <Styled.Row onClick={() => navigate("/Unregister")}>
+        <Styled.Row onClick={() => navigate("/Unregister")}>
           탈퇴하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
-        </Styled.Row> */}
+        </Styled.Row>
       </Container>
 
       <Styled.StyledSheet isOpen={open} snapPoints={[250]}>
