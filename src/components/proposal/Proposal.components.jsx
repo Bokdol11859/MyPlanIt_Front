@@ -29,13 +29,15 @@ function Proposal() {
         setPlans(null);
         setLoading(true);
         const response = await axios.get("https://myplanit.link/proposal", {
-          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        setPlans(response.data);
+        console.log(response);
+        if (response.data.message != "아직 요청사항이 없습니다.") {
+          setPlans(response.data);
+        }
       } catch (e) {
         setError(e);
       }
@@ -53,6 +55,7 @@ function Proposal() {
           proposal: inputText,
         },
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
@@ -84,7 +87,6 @@ function Proposal() {
       </div>
     );
   if (error) return <div>에러가 발생했습니다</div>;
-  if (!plans) return null;
 
   return (
     <>
@@ -113,9 +115,14 @@ function Proposal() {
       <Styled.Content>
         <Styled.ContentTitle>이런 플랜이 있으면 좋겠어요!</Styled.ContentTitle>
         <Styled.CardContainer>
-          {plans.map((plan, i) => (
-            <ProposalCard proposal={plan.proposal} num={plan.id} key={i} />
-          ))}
+          {plans &&
+            plans.map((plan, i) => (
+              <ProposalCard
+                proposal={plan.proposal}
+                num={plans.length - i}
+                key={i}
+              />
+            ))}
         </Styled.CardContainer>
       </Styled.Content>
       <BottomNavBar current="PLAN" />
