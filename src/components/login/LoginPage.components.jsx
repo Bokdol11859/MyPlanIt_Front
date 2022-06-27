@@ -10,6 +10,10 @@ function LoginPage() {
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile`;
   };
 
+  const appleLogin = () => {
+    window.alert("Apple Login");
+  };
+
   return (
     <Styled.Container>
       <Styled.LogoImg src={constants.LOGO} alt="logo" />
@@ -17,14 +21,19 @@ function LoginPage() {
 
       <Styled.ButtonContainer>
         <Styled.LoginButton
-          src="/images/kakao_login.png"
+          src="/images/kakao_login.svg"
           alt="kakaoLogin"
           onClick={kakaoLogin}
         />
         <Styled.LoginButton
-          src="/images/google_login.png"
+          src="/images/google_login.svg"
           alt="googleLogin"
           onClick={googleLogin}
+        />
+        <Styled.LoginButton
+          src="/images/apple_login.svg"
+          alt="applelogin"
+          onClick={appleLogin}
         />
       </Styled.ButtonContainer>
     </Styled.Container>
