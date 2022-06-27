@@ -27,6 +27,7 @@ import Tos from "./components/settings/tos.components";
 import Notice from "./components/settings/notice.components";
 import Unregister from "./components/settings/unregister.components";
 import NoticeDetail from "./components/settings/noticeDetail.components";
+import Agreement from "./components/login/Agreement.components";
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/login/kakao/:code" element={<KakaoSocial />} />
         <Route path="/auth/google/callback" element={<GoogleSocial />} />
+
+        <Route path="/agreement" element={<Agreement />} />
 
         <Route path="/onboard1" element={<Onboard1 />} />
         <Route path="/onboard2" element={<Onboard2 />} />
