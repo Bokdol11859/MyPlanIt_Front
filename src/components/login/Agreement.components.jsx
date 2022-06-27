@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Checkbox } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,8 @@ import Button from "@mui/material/Button";
 
 function Agreement() {
   const navigate = useNavigate();
-
+  const [service, setService] = useState(false);
+  const [info, setInfo] = useState(false);
   return (
     <>
       <Header>
@@ -23,8 +24,10 @@ function Agreement() {
       <br />
       <Container>
         <StyledCheckbox
-        // disabled={isChecked && edit}
-        // checked={isChecked}
+          checked={service}
+          onClick={() => {
+            setService(!service);
+          }}
         />
         <span
           style={{
@@ -33,6 +36,9 @@ function Agreement() {
             margin: "0px 8px",
             fontSize: 14,
             alignItems: "center",
+          }}
+          onClick={() => {
+            navigate("/tos");
           }}
         >
           <span style={{ fontFamily: "PretendardMedium" }}>
@@ -43,8 +49,10 @@ function Agreement() {
       </Container>
       <Container>
         <StyledCheckbox
-        // disabled={isChecked && edit}
-        // checked={isChecked}
+          checked={info}
+          onClick={() => {
+            setInfo(!info);
+          }}
         />
         <span
           style={{
@@ -54,6 +62,9 @@ function Agreement() {
             fontSize: 14,
             alignItems: "center",
           }}
+          onClick={() => {
+            navigate("/privacy");
+          }}
         >
           <span style={{ fontFamily: "PretendardMedium" }}>
             개인정보 처리방침 동의 (필수)
@@ -62,20 +73,53 @@ function Agreement() {
         </span>
       </Container>
       <div>
-        <Button style={{ marginTop: "50vh" }}>
-          <div
-            className="select-button"
-            style={{
-              fontFamily: "PretendardRegular",
-              fontSize: "14px",
-              textAlign: "center",
-              width: "80vw",
-              verticalAlign: "bottom",
-            }}
-          >
-            다음
-          </div>
-        </Button>
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "50vh",
+            marginBottom: 0,
+            color: "#C4C4C4",
+          }}
+        >
+          필수 항목을 동의해야 서비스를 이용할 수 있습니다.
+        </p>
+        {service && info ? (
+          <Button>
+            <div
+              className="select-button"
+              style={{
+                fontFamily: "PretendardRegular",
+                fontSize: "14px",
+                textAlign: "center",
+                width: "80vw",
+                verticalAlign: "bottom",
+                marginTop: 0,
+              }}
+              onClick={() => {
+                navigate("/todo");
+              }}
+            >
+              다음
+            </div>
+          </Button>
+        ) : (
+          <Button>
+            <div
+              className="select-button"
+              style={{
+                fontFamily: "PretendardRegular",
+                fontSize: "14px",
+                textAlign: "center",
+                width: "80vw",
+                verticalAlign: "bottom",
+                marginTop: 0,
+                opacity: "50%",
+              }}
+            >
+              다음
+            </div>
+          </Button>
+        )}
       </div>
     </>
   );
