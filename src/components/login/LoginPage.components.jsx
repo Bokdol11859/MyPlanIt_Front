@@ -21,17 +21,17 @@ function LoginPage() {
 
       <Styled.ButtonContainer>
         <Styled.LoginButton
-          src="/images/kakao_login.svg"
+          src="/images/kakao_login.png"
           alt="kakaoLogin"
           onClick={kakaoLogin}
         />
         <Styled.LoginButton
-          src="/images/google_login.svg"
+          src="/images/google_login.png"
           alt="googleLogin"
           onClick={googleLogin}
         />
         <Styled.LoginButton
-          src="/images/apple_login.svg"
+          src="/images/apple_login.png"
           alt="applelogin"
           onClick={appleLogin}
         />
