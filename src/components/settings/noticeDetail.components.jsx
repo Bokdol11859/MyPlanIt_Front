@@ -20,7 +20,9 @@ export default function NoticeDetail() {
       </Styled.Header>
       <Container>
         <NoticeDate>{date}</NoticeDate>
-        <NoticeContent>{detail}</NoticeContent>
+        <NoticeContent style={{ fontFamily: "PretendardMedium" }}>
+          {detail}
+        </NoticeContent>
       </Container>
     </>
   );
