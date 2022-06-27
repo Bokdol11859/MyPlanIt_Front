@@ -24,27 +24,42 @@ export default function Settings() {
         </Styled.UpperHeader>
       </Styled.Header>
       <Container>
-        <Styled.Row>
+        <Styled.Row style={{ fontFamily: "PretendardMedium" }}>
           앱 버전 <Styled.RowSide>1.0.3</Styled.RowSide>
         </Styled.Row>
-        <Styled.Row onClick={() => navigate("/Notice")}>
+        <Styled.Row
+          onClick={() => navigate("/Notice")}
+          style={{ fontFamily: "PretendardMedium" }}
+        >
           공지사항 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
         <SendMail href="mailto:myplanit.unicorn@gmail.com">
-          <Styled.Row>
+          <Styled.Row style={{ fontFamily: "PretendardMedium" }}>
             문의하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
           </Styled.Row>
         </SendMail>
-        <Styled.Row onClick={() => navigate("/Tos")}>
+        <Styled.Row
+          style={{ fontFamily: "PretendardMedium" }}
+          onClick={() => navigate("/Tos")}
+        >
           이용약관 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        <Styled.Row onClick={() => navigate("/Privacy")}>
+        <Styled.Row
+          style={{ fontFamily: "PretendardMedium" }}
+          onClick={() => navigate("/Privacy")}
+        >
           개인정보 처리방침 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        <Styled.Row onClick={() => setOpen(true)}>
+        <Styled.Row
+          style={{ fontFamily: "PretendardMedium" }}
+          onClick={() => setOpen(true)}
+        >
           로그아웃 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
-        <Styled.Row onClick={() => navigate("/Unregister")}>
+        <Styled.Row
+          style={{ fontFamily: "PretendardMedium" }}
+          onClick={() => navigate("/Unregister")}
+        >
           탈퇴하기 <Styled.RowSideIcon src={constants.DETAIL_ICON} />
         </Styled.Row>
       </Container>

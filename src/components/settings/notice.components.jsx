@@ -72,7 +72,9 @@ export default function Notice() {
               }}
             >
               <NoticeDate>{notice.created_at}</NoticeDate>
-              <NoticeTitle>{notice.title}</NoticeTitle>
+              <NoticeTitle style={{ fontFamily: "PretendardMedium" }}>
+                {notice.title}
+              </NoticeTitle>
               <hr style={{ border: "0.1px solid grey" }} />
             </div>
           ))}
