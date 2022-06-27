@@ -27,29 +27,14 @@ function ViewTemplate(props) {
   const accessToken = sessionStorage.getItem("access");
   const handleClose = (event, reason) => {
     if (reason && reason == "backdropClick") return;
+
     axios
-      .all([
-        axios.post(
-          "https://myplanit.link/plans/" + id + "/buy",
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        ),
-        axios.post(
-          "https://myplanit.link/myplans/" + id + "/register",
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        ),
-      ])
+      .post("https://myplanit.link/myplans/" + id + "challenge", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         navigate("/todo");
       });
